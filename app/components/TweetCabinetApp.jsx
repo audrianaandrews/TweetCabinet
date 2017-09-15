@@ -4,10 +4,16 @@ var TwitterSignIn = require('TwitterSignIn');
 var TagList = require('TagList');
 var TweetList = require('TweetList');
 var AddTweet = require('AddTweet');
+var TwitterAPI = require('TwitterAPI');
 
 var TweetCabinetApp = React.createClass({
+  getInitialState: function () {
+    return {
+      tweets: TwitterAPI.getTweets()
+    };
+  },
   render: function () {
-
+    var {tweets} = this.state;
     return (
       <div className="row">
         <div className="columns small-12">
@@ -26,7 +32,7 @@ var TweetCabinetApp = React.createClass({
           <TagList />
         </div>
         <div className="columns medium-8">
-          <TweetList />
+          <TweetList tweets={this.state.tweets}/>
         </div>
       </div>
     )

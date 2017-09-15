@@ -3,10 +3,11 @@ var React = require('react');
 
 export var TweetContainer = React.createClass({
   render: function () {
+    var {text} = this.props;
     return (
-        <div>
-            <h2>TweetContainer</h2>
-        </div>
+        <li>
+            {text}
+        </li>
     )
   }
 });
