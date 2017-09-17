@@ -5,8 +5,7 @@ export var TweetContainer = React.createClass({
   render: function () {
     var {text} = this.props;
     return (
-        <li>
-            {text}
+        <li dangerouslySetInnerHTML={{__html: text}}>
         </li>
     )
   }
