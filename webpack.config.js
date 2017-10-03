@@ -29,7 +29,8 @@ module.exports ={
       './app/components/tags',
       './app/components/tweets',
       './app/components/users',
-      './app/api'
+      './app/api',
+      './app/components/modal'
     ],
     alias:{
       applicationStyles: 'app/styles/app.scss',
@@ -37,17 +38,21 @@ module.exports ={
       reducers: 'app/reducers/reducers.jsx',
       configureStore: 'app/store/configureStore.jsx'
     },
-    extensions: ['','.js', '.jsx']
+    extensions: ['','.js', '.jsx', '.json']
   },
   module:{
     loaders:[
-      {
-        loader: 'babel-loader',
-        query:{
-          presets:['react', 'es2015']
-        },
+        {
+          loader: 'babel-loader',
+          query:{
+            presets:['react', 'es2015']
+          },
         test: /\.jsx?$/,
         exclude:/(node_modules|bower_components)/
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },

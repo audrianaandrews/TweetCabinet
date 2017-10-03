@@ -1,17 +1,35 @@
 var $ = require('jquery');
 var axios = require('axios');
 
-module.exports ={
+
+module.exports = {
+  getTags: function(tweets){
+    var tags = "";
+
+    tweets.map((tweet) => {
+      tags += tweet.tags + ",";
+    });
+    tags = tags.slice(0, -1);
+    return tags;
+  },
   getTweets: function(){
     var tweets = [
       {
-        id:1,
-        content:"https://twitter.com/RosemaryNKnight/status/909118467814674433"
+        id:908511525417242624,
+        content:"https://twitter.com/OnlyWomenCheat/status/908511525417242624",
+        tags: "job, interview"
       },
       {
-        id:2,
-        content:"https://twitter.com/OnlyWomenCheat/status/908511525417242624"
-      }];
+        id:912749648300986368,
+        content:"https://twitter.com/IssaRae/status/912749648300986368",
+        tags: "rap,award black girl,IssaRae"
+      },
+      {
+        id:909765000184639489,
+        content:"https://twitter.com/minionsart/status/909765000184639489",
+        tags:"minions art"
+      }
+    ];
     return tweets;
   },
   filterTweets: function(tweets){
@@ -22,7 +40,7 @@ module.exports ={
       var encodedTweet = encodeURIComponent(tweet.content);
       var fullURL = `${OEMBEDURL}${encodedTweet}`;
         axiosCalls.push(axios.get(fullURL).then((res) => {
-          var htmlTweet = {id:tweet.id, content: res.data.html};
+          var htmlTweet = {id:tweet.id, content: res.data.html, tags:tweet.tags};
           return htmlTweet;
         }))
     });

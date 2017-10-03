@@ -1,14 +1,26 @@
 //display the list of tags
 var React = require('react');
+var Tag = require("Tag");
 
 export var TagList = React.createClass({
   render: function () {
+    var {tags} = this.props;
+    var renderTags = () => {
+      var tagList = tags.split(",");
+
+      return tagList.map((tag) => {
+        return (
+          <li>
+            <Tag tag={tag}/>
+          </li>
+        );
+      });
+    };
+
     return (
         <div>
-          <h2>Tags:</h2>
           <ul>
-            <li>Tag 1</li>
-            <li>Tag 2</li>
+            {renderTags()}
           </ul>
         </div>
     )

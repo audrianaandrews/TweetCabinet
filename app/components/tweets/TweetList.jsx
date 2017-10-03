@@ -23,7 +23,7 @@ export var TweetList = React.createClass({
     var renderTweets = () => {
       return filteredTweets.map((tweet) => {
         return (
-          <TweetContainer key={tweet.id} text={tweet.content}/>
+          <TweetContainer key={tweet.id} text={tweet.content} tags={tweet.tags} />
         );
       });
     };

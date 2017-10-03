@@ -29,7 +29,7 @@ var TweetCabinetApp = React.createClass({
         </div>
         <div className="columns medium-4">
           <AddTweet />
-          <TagList />
+          <TagList tags={TwitterAPI.getTags(this.state.tweets)}/>
         </div>
         <div className="columns medium-8">
           <TweetList tweets={this.state.tweets}/>

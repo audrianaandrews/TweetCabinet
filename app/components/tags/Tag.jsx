@@ -3,9 +3,11 @@ var React = require('react');
 
 export var Tag = React.createClass({
   render: function () {
+    var {tag} = this.props;
+
     return (
         <div>
-            <p>Tag</p>
+            <p>{tag} <button>X</button></p>
         </div>
     )
   }
