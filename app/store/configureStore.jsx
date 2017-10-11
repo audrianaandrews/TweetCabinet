@@ -1,15 +1,14 @@
 var redux = require('redux');
-var {searchTextReducer} = require('reducers');
+var {tweetsReducer, tagsReducer} = require('reducers');
 
 export var configure = () =>{
   var reducer = redux.combineReducers({
-    searchText: searchTextReducer
+    tweets: tweetsReducer,
+    tags: tagsReducer
   });
 
   var store = redux.createStore(reducer, redux.compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
-
-
   return store;
 };

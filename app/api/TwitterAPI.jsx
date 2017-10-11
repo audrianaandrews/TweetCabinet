@@ -1,7 +1,6 @@
 var $ = require('jquery');
 var axios = require('axios');
 
-
 module.exports = {
   getTags: function(tweets){
     var tags = "";

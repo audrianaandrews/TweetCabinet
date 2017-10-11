@@ -1,10 +1,25 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var {Provider} = require('react-redux');
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
-var store = require('configureStore').configure();
 
-var TweetCabinetApp = require('TweetCabinetApp');
+var TwitterAPI = require('TwitterAPI');
+var actions = require('actions');
+
+import TweetCabinetApp from 'TweetCabinetApp';
+
+
+var store = require('configureStore').configure();
+store.subscribe(() => {
+  var state = store.getState();
+  console.log('New state', state);
+});
+
+var initialTweets = TwitterAPI.getTweets();
+store.dispatch(actions.addTweets(initialTweets));
+
+var initialTags = TwitterAPI.getTags(initialTweets);
+store.dispatch(actions.addTags(initialTags));
+
 // Load foundation
 $(document).foundation();
 

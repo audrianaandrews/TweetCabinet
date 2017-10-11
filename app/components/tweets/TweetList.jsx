@@ -2,26 +2,13 @@
 var React = require('react');
 var TweetContainer = require("TweetContainer");
 var TwitterAPI = require('TwitterAPI');
+var {connect} = require('react-redux');
 
 export var TweetList = React.createClass({
-  getInitialState: function (){
-    return {
-      filteredTweets: []
-    }
-  },
-  componentDidMount: function (){
-
-    var {tweets} = this.props;
-    var filteredTweets = TwitterAPI.filterTweets(tweets).then((data) =>{
-      this.setState({
-        filteredTweets: data
-      });
-    });
-  },
   render: function () {
-    var {filteredTweets} = this.state;
+    var {tweets} = this.props;
     var renderTweets = () => {
-      return filteredTweets.map((tweet) => {
+      return tweets.map((tweet) => {
         return (
           <TweetContainer key={tweet.id} text={tweet.content} tags={tweet.tags} />
         );

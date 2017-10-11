@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var nodemon = require('gulp-nodemon');
-var webpack = require('webpack-stream');
+var webpack = require('webpack-server');
 
 gulp.task('browser-sync', function() {
     browserSync.init({
@@ -18,34 +18,19 @@ gulp.task('webpack', function() {
   return gulp.src('src/entry.js')
   .pipe(webpack( require('./webpack.config.js') ))
   .pipe(gulp.dest('dist/'));
+  //.pipe(browserSync.stream());
 
   //gulp.watch("*.jsx").on('change', browserSync.reload);
 });
 
 gulp.task('develop', function (cb) {
-    var started = false;
-
-  return nodemon({ script:
-            'server.js'
-          , watch: ['*.js']
-    })
-      .on('restart', function () {
-        console.log('restarted!')
-      })
-      .on('crash', function() {
-        console.error('Application has crashed!\n')
-         stream.emit('restart', 10)  // restart the server in 10 seconds
-      })
-    .on('start', function () {
-		// to avoid nodemon being started multiple times
-		// thanks @matthisk
-		if (!started) {
-			cb();
-			started = true;
-		}
-	});
+  nodemon({ script: 'server.js'
+        , ext: 'html js'
+        , ignore: ['ignored.js']
+        , tasks: ['lint'] })
+  .on('restart', function () {
+    console.log('restarted!')
+  })
 });
 
-
-
-gulp.task('default', ['browser-sync', 'develop', 'webpack']);
+gulp.task('default', ['develop', 'webpack']);
