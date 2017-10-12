@@ -2,15 +2,15 @@
 var React = require('react');
 var TagList = require("TagList");
 var ReactDOMServer = require('react-dom/server');
+var TwitterAPI = require('TwitterAPI');
 
 export var TweetContainer = React.createClass({
   render: function () {
-    var {text, tags} = this.props;
-
+    var {content, tags} = this.props;
     return (
       <div>
         <input type="checkbox" />
-        <li dangerouslySetInnerHTML={{__html: text}}></li>
+        <li dangerouslySetInnerHTML={{__html: content}}></li>
         <button className="button">X</button>
         <ul>
           <TagList tags={tags} />

@@ -2,15 +2,11 @@ export var tweetsReducer = (state=[], action) => {
   switch(action.type){
     case 'ADD_TWEET':
 
-      var tweetId = action.tweetUrl;
-      var n = tweetId.lastIndexOf("/");
-      var tweetId = tweetId.substr(n+1);
-      tweetId = parseInt(tweetId);
       return [
         ...state,
         {
-          id: tweetId,
-          content:action.tweetUrl,
+          id: action.tweetId,
+          content:action.content,
           tags:"",
         }
       ];

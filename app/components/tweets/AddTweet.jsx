@@ -2,6 +2,7 @@
 var React = require('react');
 var {connect} = require('react-redux');
 var actions = require('actions');
+var TwitterAPI = require('TwitterAPI');
 
 export var AddTweet = React.createClass({
   handleSubmit: function (e) {
@@ -11,8 +12,15 @@ export var AddTweet = React.createClass({
 
     //add check for url
     if (tweetUrl.length > 0) {
-      this.refs.tweetUrl.value = '';
-      dispatch(actions.addTweet(tweetUrl));
+
+      var tweetId = tweetUrl;
+      var n = tweetId.lastIndexOf("/");
+      var tweetId = tweetId.substr(n+1);
+      tweetId = parseInt(tweetId);
+      TwitterAPI.convertTweet(tweetUrl).then((content) =>{
+          dispatch(actions.addTweet(content, tweetId));
+          //this.refs.tweetUrl.value = '';
+      });
     } else {
       this.refs.tweetUrl.focus();
     }

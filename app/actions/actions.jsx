@@ -1,7 +1,8 @@
-export var addTweet = (tweetUrl) => {
+export var addTweet = (content, tweetId) => {
   return {
     type: 'ADD_TWEET',
-    tweetUrl
+    content,
+    tweetId
   };
 };
 

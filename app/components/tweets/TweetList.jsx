@@ -10,7 +10,7 @@ export var TweetList = React.createClass({
     var renderTweets = () => {
       return tweets.map((tweet) => {
         return (
-          <TweetContainer key={tweet.id} text={tweet.content} tags={tweet.tags} />
+          <TweetContainer key={tweet.id} {...tweet} />
         );
       });
     };
