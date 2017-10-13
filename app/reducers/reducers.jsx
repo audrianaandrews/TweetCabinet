@@ -15,6 +15,19 @@ export var tweetsReducer = (state=[], action) => {
           ...state,
           ...action.tweets
         ];
+      case 'DELETE_TWEET':
+      var tweetToDelete = 0;
+
+      state.map((tweet) => {
+        if(tweet.id === action.tweetId){
+          tweetToDelete = tweet.id;
+        }
+      });
+      state.splice(tweetToDelete, 1);
+
+      return [
+        ...state
+      ];
       default:
         return state;
     }

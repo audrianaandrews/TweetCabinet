@@ -1,8 +1,9 @@
 //display list of tweets, (timeline, likes, from folder)
 var React = require('react');
-var TweetContainer = require("TweetContainer");
 var TwitterAPI = require('TwitterAPI');
 var {connect} = require('react-redux');
+
+import TweetContainer from "TweetContainer";
 
 export var TweetList = React.createClass({
   render: function () {

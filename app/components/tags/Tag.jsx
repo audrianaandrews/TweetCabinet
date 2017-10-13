@@ -6,9 +6,7 @@ export var Tag = React.createClass({
     var {tag} = this.props;
 
     return (
-        <div>
             <p>{tag} <button>X</button></p>
-        </div>
     )
   }
 });

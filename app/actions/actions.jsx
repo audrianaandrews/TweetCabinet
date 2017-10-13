@@ -6,6 +6,13 @@ export var addTweet = (content, tweetId) => {
   };
 };
 
+export var deleteTweet = (tweetId) => {
+  return {
+    type: 'DELETE_TWEET',
+    tweetId
+  };
+};
+
 export var addTweets = (tweets) =>{
   return {
     type: 'ADD_TWEETS',

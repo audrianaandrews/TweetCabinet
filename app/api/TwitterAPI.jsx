@@ -6,7 +6,9 @@ module.exports = {
     var tags = "";
 
     tweets.map((tweet) => {
-      tags += tweet.tags + ",";
+      if(tweet.tags != ""){
+        tags += tweet.tags + ",";
+      }
     });
     tags = tags.slice(0, -1);
     return tags;
