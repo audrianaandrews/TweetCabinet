@@ -4,9 +4,10 @@ var TwitterSignIn = require('TwitterSignIn');
 var TagList = require('TagList');
 var TweetList = require('TweetList');
 var {connect} = require('react-redux');
+var actions = require('actions');
 
+var TwitterAPI = require('TwitterAPI');
 import AddTweet from 'AddTweet';
-
 
 const mapStateToProps = function (state) {
   return {
@@ -23,17 +24,16 @@ export var TweetCabinetApp = React.createClass({
       });
     },
   render: function () {
-    console.log(this.props.tweets);
+    var {dispatch} = this.props;
     return (
       <div className="row">
         <div className="columns small-12">
           <div className="row">
-            <div className="columns medium-4">
+            <div className="columns medium-6">
               <h1>TweetCabinet</h1>
-            </div><div className="columns medium-4">
+            </div>
+            <div className="columns medium-6">
               <TweetSearch />
-            </div><div className="columns medium-4">
-              <TwitterSignIn />
             </div>
           </div>
         </div>
@@ -45,7 +45,11 @@ export var TweetCabinetApp = React.createClass({
           <TweetList tweets={this.props.tweets}/>
         </div>
         <div className="columns medium-12">
-          <button>Deleted Selected</button>
+          <button className="hollow button expanded"onClick={
+              () =>{
+                var currentTweets = TwitterAPI.filterTweets(this.props.tweets);
+                dispatch(actions.addTweets(currentTweets));
+              }}>Deleted Selected</button>
         </div>
       </div>
     )

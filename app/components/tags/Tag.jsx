@@ -10,7 +10,7 @@ export var Tag = React.createClass({
     return (
             <p>{tag} <button onClick={
                 () =>{
-                  dispatch(actions.deleteTag(tagId));
+                  //dispatch(actions.deleteTag(tagId));
                 }}>X</button></p>
     )
   }

@@ -1,8 +1,8 @@
-export var addTweet = (content, tweetId) => {
+export var addTweet = (content, id) => {
   return {
     type: 'ADD_TWEET',
     content,
-    tweetId
+    id
   };
 };
 
@@ -27,9 +27,9 @@ export var addTags = (tags) =>{
   };
 };
 
-export var deleteTag = (tagId) => {
+export var toggleGroupDelete = (id) => {
   return {
-    type: 'DELETE_TAG',
-    tagId
+    type: 'TOGGLE_GROUP_DELETE',
+    id
   };
 };

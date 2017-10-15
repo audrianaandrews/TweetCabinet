@@ -11,22 +11,36 @@ export var tweetsReducer = (state=[], action) => {
       ];
       case 'ADD_TWEETS':
         return [
-          ...state,
           ...action.tweets
         ];
       case 'DELETE_TWEET':
-      var tweetToDelete = 0;
+        var tweetToDelete = 0;
 
-      state.map((tweet) => {
-        if(tweet.id === action.tweetId){
-          tweetToDelete = tweet.id;
-        }
-      });
-      state.splice(tweetToDelete, 1);
+        state.map((tweet) => {
+          if(tweet.id === action.id){
+            tweetToDelete = tweet.id;
+          }
+        });
+        state.splice(tweetToDelete, 1);
 
-      return [
-        ...state
-      ];
+        return [
+          ...state
+        ];
+      case 'TOGGLE_GROUP_DELETE':
+        return state.map((tweet) => {
+          if(tweet.id === action.id){
+            var groupDelete = !tweet.groupDelete;
+
+            return {
+              id: tweet.id,
+              content:tweet.content,
+              tags: tweet.tags,
+              groupDelete: groupDelete
+            };
+          } else {
+            return tweet
+          }
+        });
       default:
         return state;
     }
@@ -40,7 +54,7 @@ export var tagsReducer = (state=[], action) => {
         var tagToDelete = 0;
 
         state.map((tag) => {
-          if(tag.id === action.tag){
+          if(tag.id === action.id){
             tagToDelete = tag.id;
           }
         });

@@ -18,7 +18,7 @@ module.exports = {
 
         if(tagExists == false){
           tags.push({
-            tagId: tag.tagId,
+            tagId: tag.id,
             tagName: tag.tagName,
             count: 1
           });
@@ -35,14 +35,14 @@ module.exports = {
         content:`<blockquote class='twitter-tweet'><p lang=\"en\" dir=\"ltr\"\u003EWho the fuck stands in line for a job interview? \u003Ca href=\"https:\/\/t.co\/4Phf8QoKKS\"\u003Ehttps:\/\/t.co\/4Phf8QoKKS\u003C\/a\u003E\u003C\/p\u003E&mdash; Hoodie Melo (@Word2MyYankees) \u003Ca href=\"https:\/\/twitter.com\/Word2MyYankees\/status\/908511525417242624?ref_src=twsrc%5Etfw\"\u003ESeptember 15, 2017\u003C\/a></blockquote>`,
         tags: [
           {
-            tagId: 1,
+            id: 1,
             tagName:"job"
           }, {
-            tagId: 2,
+            id: 2,
             tagName:"interview"
           },
           {
-            tagId: 7,
+            id: 7,
             tagName:"funny"
           }],
         groupDelete: false
@@ -52,19 +52,19 @@ module.exports = {
         content:`\u003Cblockquote class=\"twitter-tweet\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EHad to do it with my girl, \u003Ca href=\"https:\/\/twitter.com\/MoreReginaHall?ref_src=twsrc%5Etfw\"\u003E@MoreReginaHall\u003C\/a\u003E.\u003Ca href=\"https:\/\/twitter.com\/hashtag\/ForTheDChallenge?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#ForTheDChallenge\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/nlRafF6dLC\"\u003Epic.twitter.com\/nlRafF6dLC\u003C\/a\u003E\u003C\/p\u003E&mdash; Issa Rae (@IssaRae) \u003Ca href=\"https:\/\/twitter.com\/IssaRae\/status\/912749648300986368?ref_src=twsrc%5Etfw\"\u003ESeptember 26, 2017\u003C\/a\u003E\u003C\/blockquote\u003E`,
         tags: [
           {
-            tagId: 3,
+            id: 3,
             tagName:"rap"
           },
           {
-            tagId: 4,
+            id: 4,
             tagName:"award black girl"
           },
           {
-            tagId: 5,
+            id: 5,
             tagName:"IssaRae"
           },
           {
-            tagId: 7,
+            id: 7,
             tagName:"funny"
           }],
         groupDelete: false
@@ -74,7 +74,7 @@ module.exports = {
         content:`\u003Cblockquote class=\"twitter-tweet\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAdding custom colors using RGB channels of a mask, shader code in first reply! \u003Ca href=\"https:\/\/twitter.com\/hashtag\/gamedev?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#gamedev\u003C\/a\u003E \u003Ca href=\"https:\/\/twitter.com\/hashtag\/tutorial?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#tutorial\u003C\/a\u003E \u003Ca href=\"https:\/\/twitter.com\/hashtag\/unity3d?src=hash&amp;ref_src=twsrc%5Etfw\"\u003E#unity3d\u003C\/a\u003E\u003Cbr\u003EMore &gt; \u003Ca href=\"https:\/\/t.co\/FqAsMb9Plg\"\u003Ehttps:\/\/t.co\/FqAsMb9Plg\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/UlLNbBEzQm\"\u003Epic.twitter.com\/UlLNbBEzQm\u003C\/a\u003E\u003C\/p\u003E&mdash; Joyce[MinionsArt] (@minionsart) \u003Ca href=\"https:\/\/twitter.com\/minionsart\/status\/909765000184639489?ref_src=twsrc%5Etfw\"\u003ESeptember 18, 2017\u003C\/a\u003E\u003C\/blockquote\u003E`,
         tags:[
           {
-            tagId: 6,
+            id: 6,
             tagName:"minions art"
           }],
         groupDelete: false
@@ -83,25 +83,14 @@ module.exports = {
     return tweets;
   },
   filterTweets: function(tweets){
-    var oEmbedTweets = [];
-    var axiosCalls = [];
-    const OEMBEDURL = "https://publish.twitter.com/oembed?url=";
-    tweets.map((tweet) => {
-      var encodedTweet = encodeURIComponent(tweet.content);
-      var fullURL = `${OEMBEDURL}${encodedTweet}`;
-        axiosCalls.push(axios.get(fullURL).then((res) => {
-          var htmlTweet = {id:tweet.id, content: res.data.html, tags:tweet.tags};
-          return htmlTweet;
-        }))
+    var currentTweets = tweets;
+
+    currentTweets = currentTweets.filter((tweet) => {
+      return !tweet.groupDelete;
     });
 
-    return axios.all(axiosCalls)
-    .then((res) => {
-        res.forEach((data =>{
-          oEmbedTweets.push(data);
-        }));
-      return oEmbedTweets;
-    });
+    console.log(currentTweets);
+    return currentTweets;
   },
   convertTweet: function(tweetUrl){
     const OEMBEDURL = "https://publish.twitter.com/oembed?url=";
