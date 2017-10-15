@@ -7,9 +7,6 @@ var {connect} = require('react-redux');
 
 import AddTweet from 'AddTweet';
 
-var TwitterAPI = require('TwitterAPI');
-
-var actions = require('actions');
 
 const mapStateToProps = function (state) {
   return {
@@ -46,6 +43,9 @@ export var TweetCabinetApp = React.createClass({
         </div>
         <div className="columns medium-8">
           <TweetList tweets={this.props.tweets}/>
+        </div>
+        <div className="columns medium-12">
+          <button>Deleted Selected</button>
         </div>
       </div>
     )

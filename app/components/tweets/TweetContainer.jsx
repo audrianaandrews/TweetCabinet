@@ -19,6 +19,7 @@ export var TweetContainer = React.createClass({
             }}>X</button>
         <ul>
           <TagList tags={tags} />
+          <input type="text" placeholder="Add Tags"/>
         </ul>
       </div>
     )

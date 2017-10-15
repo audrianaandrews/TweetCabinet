@@ -14,10 +14,10 @@ store.subscribe(() => {
   console.log('New state', state);
 });
 
-var initialTweets = TwitterAPI.getTweets();
+var initialTweets = TwitterAPI.getAllTweets();
 store.dispatch(actions.addTweets(initialTweets));
 
-var initialTags = TwitterAPI.getTags(initialTweets);
+var initialTags = TwitterAPI.getAllTags(initialTweets);
 store.dispatch(actions.addTags(initialTags));
 
 // Load foundation

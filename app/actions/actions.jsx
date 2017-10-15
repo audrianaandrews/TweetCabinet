@@ -6,10 +6,10 @@ export var addTweet = (content, tweetId) => {
   };
 };
 
-export var deleteTweet = (tweetId) => {
+export var deleteTweet = (id) => {
   return {
     type: 'DELETE_TWEET',
-    tweetId
+    id
   };
 };
 
@@ -24,5 +24,12 @@ export var addTags = (tags) =>{
   return {
     type: 'ADD_TAGS',
     tags
+  };
+};
+
+export var deleteTag = (tagId) => {
+  return {
+    type: 'DELETE_TAG',
+    tagId
   };
 };

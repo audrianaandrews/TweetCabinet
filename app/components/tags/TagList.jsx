@@ -1,19 +1,16 @@
 //display the list of tags
 var React = require('react');
-var Tag = require("Tag");
-var uuid = require('node-uuid');
+import Tag from "Tag";
 
 export var TagList = React.createClass({
   render: function () {
     var {tags} = this.props;
     var renderTags = () => {
-      var tagList = tags.split(",");
-      var tagId = uuid();
 
-      return tagList.map((tag) => {
+      return tags.map((tag) => {
         return (
           <li>
-            <Tag tag={tag} key={tagId}/>
+            <Tag tag={tag.tagName} key={tag.tagId}/>
           </li>
         );
       });
