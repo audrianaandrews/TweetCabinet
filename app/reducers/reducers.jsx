@@ -15,10 +15,9 @@ export var tweetsReducer = (state=[], action) => {
         ];
       case 'DELETE_TWEET':
         var tweetToDelete = 0;
-
-        state.map((tweet) => {
+        state.map((tweet, index) => {
           if(tweet.id === action.id){
-            tweetToDelete = tweet.id;
+            tweetToDelete = index;
           }
         });
         state.splice(tweetToDelete, 1);
@@ -63,6 +62,22 @@ export var tagsReducer = (state=[], action) => {
         return [
           ...state
         ];
+        case 'DELETE_TAGS':
+          var tagsLeft = [];
+          console.log(state);
+
+          state.map((tag, index) => {
+            action.tags.map((deleteTag) => {
+              if(tag.tagName == deleteTag.tagName){
+                tag.count--;
+              }
+            });
+            if(tag.count != 0){
+              tagsLeft.push(tag);
+            }
+          });
+
+          return tagsLeft;
       default:
         return state;
     }

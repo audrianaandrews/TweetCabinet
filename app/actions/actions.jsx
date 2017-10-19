@@ -27,6 +27,13 @@ export var addTags = (tags) =>{
   };
 };
 
+export var deleteTags = (tags) =>{
+  return {
+    type: 'DELETE_TAGS',
+    tags
+  };
+};
+
 export var toggleGroupDelete = (id) => {
   return {
     type: 'TOGGLE_GROUP_DELETE',

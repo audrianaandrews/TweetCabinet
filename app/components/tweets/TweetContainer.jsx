@@ -25,7 +25,8 @@ export var TweetContainer = React.createClass({
             }}><i className="fa fa-check" aria-hidden="true"></i></button>
           <button className="button hollow" onClick={
         () =>{
-          dispatch(actions.deleteTweet(tweetId));
+          dispatch(actions.deleteTweet(id));
+          dispatch(actions.deleteTags(tags));
         }}>X</button>
           <div dangerouslySetInnerHTML={{__html: content}}></div>
         <ul>
