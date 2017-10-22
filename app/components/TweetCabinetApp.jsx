@@ -1,12 +1,12 @@
 var React = require('react');
 var TweetSearch = require('TweetSearch');
 var TwitterSignIn = require('TwitterSignIn');
-var MainTagList = require('MainTagList');
 var TweetList = require('TweetList');
 var {connect} = require('react-redux');
 var actions = require('actions');
 
 var TwitterAPI = require('TwitterAPI');
+import MainTagList  from 'MainTagList';
 import AddTweet from 'AddTweet';
 
 const mapStateToProps = function (state) {
@@ -19,7 +19,7 @@ const mapStateToProps = function (state) {
 export var TweetCabinetApp = React.createClass({
   componentWillReceiveProps(nextProps) {
       var currentTweets = TwitterAPI.filterTweets(nextProps.tweets);
-      
+
       this.setState({
         tweets: currentTweets,
         tags: nextProps.tags

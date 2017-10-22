@@ -62,7 +62,7 @@ module.exports = {
           },
           {
             id: 4,
-            tagName:"award black girl"
+            tagName:"awkward black girl"
           },
           {
             id: 5,

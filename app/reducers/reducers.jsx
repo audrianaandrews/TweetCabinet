@@ -55,6 +55,23 @@ export var tweetsReducer = (state=[], action) => {
             return tweet
           }
         });
+      case 'DELETE_TAG_FROM_TWEETS':
+        state.map((tweet) => {
+          var tagToDelete = null;
+
+          tweet.tags.map((tag, index) => {
+            if(tag.id === action.id){
+              tagToDelete = index;
+              console.log(tagToDelete);
+            }
+          });
+
+          if(tagToDelete != null){
+            tweet.tags.splice(tagToDelete, 1);
+          }
+        });
+
+        return state;
       default:
         return state;
     }
@@ -89,6 +106,18 @@ export var tagsReducer = (state=[], action) => {
         });
 
         return tagsLeft;
+      case 'DELETE_MAIN_TAG':
+        var tagToDelete = 0;
+        state.map((tag, index) => {
+          if(tag.id === action.id){
+            tagToDelete = index;
+          }
+        });
+        state.splice(tagToDelete, 1);
+
+        return [
+          ...state
+        ];
       default:
         return state;
     }

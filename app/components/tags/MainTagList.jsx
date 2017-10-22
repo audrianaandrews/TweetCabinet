@@ -1,6 +1,8 @@
 //display the list of tags
 var React = require('react');
 import MainTag from "MainTag";
+var actions = require('actions');
+var {connect} = require('react-redux');
 
 export var MainTagList = React.createClass({
   render: function () {
@@ -26,4 +28,4 @@ export var MainTagList = React.createClass({
   }
 });
 
-module.exports = MainTagList;
+export default connect()(MainTagList);

@@ -21,13 +21,6 @@ export var updateTweetTags = (id, tweetId) => {
   };
 };
 
-/*export function updateTweet(id, tweetId){
-  return (dispatch) => {
-    dispatch({ type: 'UPDATE_TWEET', id, tweetId});
-    return;
-  }
-};*/
-
 export var addTweets = (tweets) =>{
   return {
     type: 'ADD_TWEETS',
@@ -60,6 +53,20 @@ export var deleteTweetTag = (tag, tags) =>{
 export var toggleGroupDelete = (id) => {
   return {
     type: 'TOGGLE_GROUP_DELETE',
+    id
+  };
+};
+
+export var deleteMainTag = (id) => {
+  return {
+    type: 'DELETE_MAIN_TAG',
+    id
+  };
+};
+
+export var deleteTagFromTweets = (id) => {
+  return {
+    type: 'DELETE_TAG_FROM_TWEETS',
     id
   };
 };
