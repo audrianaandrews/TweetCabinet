@@ -1,13 +1,16 @@
-var redux = require('redux');
+//var  = require('redux');
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 var {tweetsReducer, tagsReducer} = require('reducers');
 
 export var configure = () =>{
-  var reducer = redux.combineReducers({
+  var reducer = combineReducers({
     tweets: tweetsReducer,
     tags: tagsReducer
   });
 
-  var store = redux.createStore(reducer, redux.compose(
+  var store = createStore(reducer, compose(
+    applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
   return store;

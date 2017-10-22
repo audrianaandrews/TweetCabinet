@@ -2,16 +2,19 @@
 var React = require('react');
 var actions = require('actions');
 var {connect} = require('react-redux');
+var TwitterAPI = require('TwitterAPI');
 
 export var Tag = React.createClass({
+  deletePressed: function(e){
+    this.props.handleDeleteMainTag(this);
+  },
   render: function () {
-    var {tag, tagId, count, dispatch} = this.props;
+    var {tagName, id, count} = this.props;
 
     return (
-            <p>{tag} <button onClick={
-                () =>{
-                  //dispatch(actions.deleteTag(tagId));
-                }}>X</button></p>
+            <p>{tagName} <button onClick={() => {
+                this.deletePressed();
+              }}>X</button></p>
     )
   }
 });

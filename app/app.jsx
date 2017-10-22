@@ -9,6 +9,7 @@ import TweetCabinetApp from 'TweetCabinetApp';
 
 
 var store = require('configureStore').configure();
+
 store.subscribe(() => {
   var state = store.getState();
   console.log('New state', state);

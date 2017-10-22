@@ -5,6 +5,7 @@ module.exports = {
   getAllTags: function(tweets){
     var tags = [];
 
+    //go through tweets and take out all the tags and add them to a tags list
     tweets.map((tweet) => {
       tweet.tags.map((tag) =>{
         var tagExists = false;
@@ -18,13 +19,17 @@ module.exports = {
 
         if(tagExists == false){
           tags.push({
-            tagId: tag.id,
+            id: tag.id,
             tagName: tag.tagName,
             count: 1
           });
         }
       });
 
+    });
+
+    tags.sort(function(a, b) {
+        return a.tagName.localeCompare(b.tagName);
     });
     return tags;
   },
@@ -85,19 +90,32 @@ module.exports = {
   filterTweets: function(tweets){
     var currentTweets = tweets;
 
+
     currentTweets = currentTweets.filter((tweet) => {
       return !tweet.groupDelete;
     });
 
-    console.log(currentTweets);
+    currentTweets = currentTweets.map((tweet) => {
+      var newTags = [];
+      tweet.tags.map((tag) => {
+        newTags.push(tag);
+      });
+      tweet.tags = newTags;
+    });
+
+
     return currentTweets;
   },
   convertTweet: function(tweetUrl){
+    var configs = {
+        headers: {'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'}
+    };
     const OEMBEDURL = "https://publish.twitter.com/oembed?url=";
     var encodedTweet = encodeURIComponent(tweetUrl);
     var fullURL = `${OEMBEDURL}${encodedTweet}`;
 
-    return axios.get(fullURL).then((res) => {
+    return axios.get(fullURL, configs).then((res) => {
       return res.data.html;
     });
   }

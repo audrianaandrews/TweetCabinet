@@ -13,6 +13,21 @@ export var deleteTweet = (id) => {
   };
 };
 
+export var updateTweetTags = (id, tweetId) => {
+  return {
+    type: 'UPDATE_TWEET_TAGS',
+    id,
+    tweetId
+  };
+};
+
+/*export function updateTweet(id, tweetId){
+  return (dispatch) => {
+    dispatch({ type: 'UPDATE_TWEET', id, tweetId});
+    return;
+  }
+};*/
+
 export var addTweets = (tweets) =>{
   return {
     type: 'ADD_TWEETS',
@@ -30,6 +45,14 @@ export var addTags = (tags) =>{
 export var deleteTags = (tags) =>{
   return {
     type: 'DELETE_TAGS',
+    tags
+  };
+};
+
+export var deleteTweetTag = (tag, tags) =>{
+  return {
+    type: 'DELETE_TWEET_TAG',
+    tag,
     tags
   };
 };

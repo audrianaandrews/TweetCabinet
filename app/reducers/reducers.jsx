@@ -13,6 +13,21 @@ export var tweetsReducer = (state=[], action) => {
         return [
           ...action.tweets
         ];
+      case 'UPDATE_TWEET_TAGS':
+        var tagToDelete = 0;
+        state.map((tweet) => {
+          if(tweet.id === action.tweetId){
+            tweet.tags.map((tag, index) => {
+              if(tag.id === action.id){
+                tagToDelete = index;
+              }
+            });
+            tweet.tags.splice(tagToDelete, 1);
+          }
+        });
+        return [
+          ...state
+        ];
       case 'DELETE_TWEET':
         var tweetToDelete = 0;
         state.map((tweet, index) => {
@@ -49,35 +64,31 @@ export var tagsReducer = (state=[], action) => {
   switch(action.type){
       case 'ADD_TAGS':
         return action.tags;
-      case 'DELETE_TAG':
-        var tagToDelete = 0;
-
+      case 'DELETE_TWEET_TAG':
         state.map((tag) => {
-          if(tag.id === action.id){
-            tagToDelete = tag.id;
+          if(tag.id === action.tagId){
+            tag.count--;
           }
         });
-        state.splice(tagToDelete, 1);
 
         return [
           ...state
         ];
-        case 'DELETE_TAGS':
-          var tagsLeft = [];
-          console.log(state);
+      case 'DELETE_TAGS':
+        var tagsLeft = [];
 
-          state.map((tag, index) => {
-            action.tags.map((deleteTag) => {
-              if(tag.tagName == deleteTag.tagName){
-                tag.count--;
-              }
-            });
-            if(tag.count != 0){
-              tagsLeft.push(tag);
+        state.map((tag, index) => {
+          action.tags.map((deleteTag) => {
+            if(tag.tagName == deleteTag.tagName){
+              tag.count--;
             }
           });
+          if(tag.count != 0){
+            tagsLeft.push(tag);
+          }
+        });
 
-          return tagsLeft;
+        return tagsLeft;
       default:
         return state;
     }

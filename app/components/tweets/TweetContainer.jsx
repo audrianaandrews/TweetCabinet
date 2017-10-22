@@ -1,6 +1,6 @@
 //display tweet with tags and checkbox
 var React = require('react');
-var TagList = require("TagList");
+import TagList from "TagList";
 var ReactDOMServer = require('react-dom/server');
 var TwitterAPI = require('TwitterAPI');
 var {connect} = require('react-redux');
@@ -30,7 +30,7 @@ export var TweetContainer = React.createClass({
         }}>X</button>
           <div dangerouslySetInnerHTML={{__html: content}}></div>
         <ul>
-          <TagList tags={tags} />
+          <TagList tags={tags} tweetId={id}/>
           <input type="text" placeholder="Add Tags"/>
         </ul>
         <hr />
