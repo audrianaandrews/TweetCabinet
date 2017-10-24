@@ -90,7 +90,10 @@ module.exports = {
     ];
     return tweets;
   },
-  filterTweets: function(tweets){
+  getTweetFilter: function(filterText){
+    return filterText;
+  },
+  filterTweets: function(tweets, filterText){
     var currentTweets = tweets;
 
 
@@ -105,6 +108,19 @@ module.exports = {
       });
       tweet.tags = newTags;
     });
+
+    if(filterText != ""){
+      currentTweets = currentTweets.filter((tweet) => {
+        var tagExists = false;
+
+        tweet.tags.map((tag) => {
+          if(tagName === filterText){
+            tagExists = true;
+          }
+        });
+        return tagExists;
+      });
+    }
 
 
     return currentTweets;

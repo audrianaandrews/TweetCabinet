@@ -1,3 +1,4 @@
+/***Tweet Actions***/
 export var addTweet = (content, id) => {
   return {
     type: 'ADD_TWEET',
@@ -36,6 +37,8 @@ export var addTweetTag = (tweetId, text, tagId) =>{
     tagId
   };
 };
+
+/***Tag Actions***/
 
 export var addTags = (tags) =>{
   return {
@@ -85,5 +88,13 @@ export var deleteTagFromTweets = (id) => {
   return {
     type: 'DELETE_TAG_FROM_TWEETS',
     id
+  };
+};
+
+/***Filter***/
+export var filterTweets = (filterText) => {
+  return {
+    type: 'FILTER_TWEETS',
+    filterText
   };
 };

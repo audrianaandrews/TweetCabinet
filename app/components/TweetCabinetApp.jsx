@@ -12,18 +12,21 @@ import AddTweet from 'AddTweet';
 const mapStateToProps = function (state) {
   return {
     tweets: state.tweets,
-    tags: state.tags
+    tags: state.tags, 
+    filterText: state.filterText
   };
 }
 
 export var TweetCabinetApp = React.createClass({
   componentWillReceiveProps(nextProps) {
-      var currentTweets = TwitterAPI.filterTweets(nextProps.tweets);
+      console.log(nextProps.tweets);
+      var currentTweets = TwitterAPI.filterTweets(nextProps.tweets, nextProps.filterText);
       var currentTags = TwitterAPI.sortTags(nextProps.tags);
 
       this.setState({
         tweets: currentTweets,
-        tags: currentTags
+        tags: currentTags,
+        filterText: nextProps.filterText
       });
   },
   render: function () {
@@ -50,7 +53,7 @@ export var TweetCabinetApp = React.createClass({
         <div className="columns medium-12">
           <button className="hollow button expanded" onClick={
               () =>{
-                var currentTweets = TwitterAPI.filterTweets(this.props.tweets);
+                var currentTweets = TwitterAPI.filterTweets(this.props.tweets, this.props.filterText);
                 dispatch(actions.addTweets(currentTweets));
                 var currentTags = TwitterAPI.getAllTags(currentTweets);
                 dispatch(actions.addTags(currentTags));

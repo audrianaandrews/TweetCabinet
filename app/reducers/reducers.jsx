@@ -150,3 +150,12 @@ export var tagsReducer = (state=[], action) => {
         return state;
     }
 }
+
+export var filterTextReducer = (state=null, action) => {
+   switch(action.type){
+      case 'FILTER_TWEETS':
+        return action.filterText
+      default:
+            return state;
+        }
+}

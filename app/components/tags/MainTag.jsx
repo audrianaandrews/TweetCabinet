@@ -8,7 +8,10 @@ export var MainTag = React.createClass({
     var {tag, id, count, dispatch} = this.props;
 
     return (
-            <p>{tag} ({count}) <button onClick={
+            <p onClick= {
+              () => {
+                dispatch(actions.filterTweets(tag));
+              }}>{tag} ({count}) <button onClick={
                 () =>{
                   dispatch(actions.deleteMainTag(id));
                   dispatch(actions.deleteTagFromTweets(id));
