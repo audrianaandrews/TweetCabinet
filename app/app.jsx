@@ -19,6 +19,7 @@ var initialTweets = TwitterAPI.getAllTweets();
 store.dispatch(actions.addTweets(initialTweets));
 
 var initialTags = TwitterAPI.getAllTags(initialTweets);
+initialTags = TwitterAPI.sortTags(initialTags);
 store.dispatch(actions.addTags(initialTags));
 
 // Load foundation

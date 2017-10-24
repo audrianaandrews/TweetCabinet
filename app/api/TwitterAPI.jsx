@@ -20,7 +20,7 @@ module.exports = {
         if(tagExists == false){
           tags.push({
             id: tag.id,
-            tagName: tag.tagName,
+            tagName: tag.tagName.toLowerCase(),
             count: 1
           });
         }
@@ -28,6 +28,9 @@ module.exports = {
 
     });
 
+    return tags;
+  },
+  sortTags: function(tags){
     tags.sort(function(a, b) {
         return a.tagName.localeCompare(b.tagName);
     });
@@ -66,7 +69,7 @@ module.exports = {
           },
           {
             id: 5,
-            tagName:"IssaRae"
+            tagName:"issarae"
           },
           {
             id: 7,

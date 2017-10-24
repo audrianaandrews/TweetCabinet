@@ -5,6 +5,7 @@ var ReactDOMServer = require('react-dom/server');
 var TwitterAPI = require('TwitterAPI');
 var {connect} = require('react-redux');
 var actions = require('actions');
+var uuid = require('node-uuid');
 
 export var TweetContainer = React.createClass({
   getInitialState: function () {
@@ -31,7 +32,29 @@ export var TweetContainer = React.createClass({
           <div dangerouslySetInnerHTML={{__html: content}}></div>
         <ul>
           <TagList tags={tags} tweetId={id}/>
-          <input type="text" placeholder="Add Tags"/>
+          <input type="text" placeholder="Add Tags" ref="newTag" onChange={
+              () => {
+                var newTag = this.refs.newTag.value;
+                if(newTag.slice(-1) == ","){
+                  newTag = newTag.slice(0, newTag.length-1).toLowerCase();
+                  var tagId = uuid();
+                  var tagExists = false;
+                  tags.map((tag) => {
+
+                      if(tag.tagName == newTag){
+                        tagExists = true;
+                      }
+                  });
+
+                  if(tagExists === false){
+                    dispatch(actions.addTweetTag(id, newTag, tagId));
+                    dispatch(actions.addMainTag(tagId, newTag));
+                  }
+
+                  this.refs.newTag.value = "";
+                }
+              }
+            }/>
         </ul>
         <hr />
       </div>

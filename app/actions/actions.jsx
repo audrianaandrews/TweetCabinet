@@ -28,6 +28,15 @@ export var addTweets = (tweets) =>{
   };
 };
 
+export var addTweetTag = (tweetId, text, tagId) =>{
+  return {
+    type: 'ADD_TWEET_TAG',
+    tweetId,
+    text,
+    tagId
+  };
+};
+
 export var addTags = (tags) =>{
   return {
     type: 'ADD_TAGS',
@@ -54,6 +63,14 @@ export var toggleGroupDelete = (id) => {
   return {
     type: 'TOGGLE_GROUP_DELETE',
     id
+  };
+};
+
+export var addMainTag = (tagId, text) => {
+  return {
+    type: 'ADD_MAIN_TAG',
+    tagId,
+    text
   };
 };
 

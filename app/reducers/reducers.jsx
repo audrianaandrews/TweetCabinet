@@ -70,8 +70,17 @@ export var tweetsReducer = (state=[], action) => {
             tweet.tags.splice(tagToDelete, 1);
           }
         });
-
         return state;
+      case 'ADD_TWEET_TAG':
+        state.map((tweet) => {
+          if(tweet.id === action.tweetId){
+            tweet.tags.push({
+                id: action.tagId,
+                tagName: action.text
+            });
+          }
+        });
+        return [...state];
       default:
         return state;
     }
@@ -79,6 +88,25 @@ export var tweetsReducer = (state=[], action) => {
 
 export var tagsReducer = (state=[], action) => {
   switch(action.type){
+    case 'ADD_MAIN_TAG':
+      var tagExists = false;
+      var tagText = action.text.toLowerCase();
+
+      state.map((tag) => {
+        if(tag.tagName === tagText){
+          tag.count++;
+          tagExists = true;
+        }
+      });
+
+      if(tagExists != true){
+        state.push({
+          id: action.tagId,
+          tagName: tagText,
+          count: 1
+        });
+      }
+      return [...state]
       case 'ADD_TAGS':
         return action.tags;
       case 'DELETE_TWEET_TAG':
@@ -105,7 +133,7 @@ export var tagsReducer = (state=[], action) => {
           }
         });
 
-        return tagsLeft;
+        return [...tagsLeft];
       case 'DELETE_MAIN_TAG':
         var tagToDelete = 0;
         state.map((tag, index) => {
