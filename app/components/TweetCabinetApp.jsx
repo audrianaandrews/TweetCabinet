@@ -1,13 +1,14 @@
 var React = require('react');
 var TweetSearch = require('TweetSearch');
 var TwitterSignIn = require('TwitterSignIn');
-var TweetList = require('TweetList');
+
 var {connect} = require('react-redux');
 var actions = require('actions');
 
 var TwitterAPI = require('TwitterAPI');
 import MainTagList  from 'MainTagList';
 import AddTweet from 'AddTweet';
+import TweetList from 'TweetList';
 
 const mapStateToProps = function (state) {
   return {
@@ -19,14 +20,14 @@ const mapStateToProps = function (state) {
 
 export var TweetCabinetApp = React.createClass({
   componentWillReceiveProps(nextProps) {
-      var currentTweets = TwitterAPI.filterTweets(nextProps.tweets, nextProps.filterText);
+      /*var currentTweets = TwitterAPI.filterTweets(nextProps.tweets, nextProps.filterText);
       var currentTags = TwitterAPI.sortTags(nextProps.tags);
-      
+
       this.setState({
         tweets: currentTweets,
         tags: currentTags,
         filterText: nextProps.filterText
-      });
+      });*/
   },
   render: function () {
     var {dispatch} = this.props;
@@ -44,15 +45,15 @@ export var TweetCabinetApp = React.createClass({
         </div>
         <div className="columns medium-4">
           <AddTweet />
-          <MainTagList tags={this.props.tags}/>
+          <MainTagList/>
         </div>
         <div className="columns medium-8">
-          <TweetList tweets={this.props.tweets}/>
+          <TweetList/>
         </div>
         <div className="columns medium-12">
           <button className="hollow button expanded" onClick={
               () =>{
-                var currentTweets = TwitterAPI.filterTweets(this.props.tweets, this.props.filterText);
+                var currentTweets = TwitterAPI.groupDelete(this.props.tweets);
                 dispatch(actions.addTweets(currentTweets));
                 var currentTags = TwitterAPI.getAllTags(currentTweets);
                 dispatch(actions.addTags(currentTags));

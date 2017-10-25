@@ -28,4 +28,8 @@ export var MainTagList = React.createClass({
   }
 });
 
-export default connect()(MainTagList);
+export default connect(
+  (state) => {
+    return state;
+  }
+)(MainTagList);

@@ -7,9 +7,9 @@ import TweetContainer from "TweetContainer";
 
 export var TweetList = React.createClass({
   render: function () {
-    var {tweets} = this.props;
+    var {tweets, tags, filterText} = this.props;
     var renderTweets = () => {
-      return tweets.map((tweet) => {
+      return TwitterAPI.filterTweets(tweets, filterText).map((tweet) => {
         return (
           <TweetContainer key={tweet.id} {...tweet} />
         );
@@ -26,4 +26,9 @@ export var TweetList = React.createClass({
   }
 });
 
-module.exports = TweetList;
+//connect redux store to an individual component
+export default connect(
+  (state) => {
+    return state;
+  }
+)(TweetList);
