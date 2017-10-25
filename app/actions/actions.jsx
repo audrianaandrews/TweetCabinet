@@ -91,7 +91,7 @@ export var deleteTagFromTweets = (id) => {
   };
 };
 
-/***Filter***/
+/***Filter Actions***/
 export var filterTweets = (filterText) => {
   return {
     type: 'FILTER_TWEETS',

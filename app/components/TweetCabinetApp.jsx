@@ -12,17 +12,16 @@ import AddTweet from 'AddTweet';
 const mapStateToProps = function (state) {
   return {
     tweets: state.tweets,
-    tags: state.tags, 
+    tags: state.tags,
     filterText: state.filterText
   };
 }
 
 export var TweetCabinetApp = React.createClass({
   componentWillReceiveProps(nextProps) {
-      console.log(nextProps.tweets);
       var currentTweets = TwitterAPI.filterTweets(nextProps.tweets, nextProps.filterText);
       var currentTags = TwitterAPI.sortTags(nextProps.tags);
-
+      
       this.setState({
         tweets: currentTweets,
         tags: currentTags,

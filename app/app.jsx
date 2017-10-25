@@ -22,7 +22,7 @@ var initialTags = TwitterAPI.getAllTags(initialTweets);
 initialTags = TwitterAPI.sortTags(initialTags);
 store.dispatch(actions.addTags(initialTags));
 
-var filterText = TwitterAPI.getTweetFilter(null);
+var filterText = TwitterAPI.getTweetFilter("");
 store.dispatch(actions.filterTweets(filterText));
 
 // Load foundation

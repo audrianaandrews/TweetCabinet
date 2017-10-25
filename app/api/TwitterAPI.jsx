@@ -96,12 +96,11 @@ module.exports = {
   filterTweets: function(tweets, filterText){
     var currentTweets = tweets;
 
-
     currentTweets = currentTweets.filter((tweet) => {
       return !tweet.groupDelete;
     });
 
-    currentTweets = currentTweets.map((tweet) => {
+    currentTweets.map((tweet) => {
       var newTags = [];
       tweet.tags.map((tag) => {
         newTags.push(tag);
@@ -114,7 +113,7 @@ module.exports = {
         var tagExists = false;
 
         tweet.tags.map((tag) => {
-          if(tagName === filterText){
+          if(tag.tagName === filterText){
             tagExists = true;
           }
         });
@@ -122,6 +121,7 @@ module.exports = {
       });
     }
 
+    console.log(currentTweets);
 
     return currentTweets;
   },

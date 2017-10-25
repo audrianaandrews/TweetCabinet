@@ -151,7 +151,7 @@ export var tagsReducer = (state=[], action) => {
     }
 }
 
-export var filterTextReducer = (state=null, action) => {
+export var filterTextReducer = (state="", action) => {
    switch(action.type){
       case 'FILTER_TWEETS':
         return action.filterText
