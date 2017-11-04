@@ -34,6 +34,7 @@ module.exports ={
     ],
     alias:{
       applicationStyles: 'app/styles/app.scss',
+      TwitterCredentials:'app/api/TwitterCredentials.js',
       actions: 'app/actions/actions.jsx',
       reducers: 'app/reducers/reducers.jsx',
       configureStore: 'app/store/configureStore.jsx'
@@ -62,5 +63,5 @@ module.exports ={
     ]
   },
   devtool: 'inline-source-map',
-  watch: true,
+  watch: true
 };

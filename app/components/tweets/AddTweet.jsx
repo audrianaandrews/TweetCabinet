@@ -3,6 +3,7 @@ var React = require('react');
 var {connect} = require('react-redux');
 var actions = require('actions');
 var TwitterAPI = require('TwitterAPI');
+import { Link } from 'react-router';
 
 export var AddTweet = React.createClass({
   handleSubmit: function (e) {
@@ -31,7 +32,9 @@ export var AddTweet = React.createClass({
     <div className="columns small-12">
       <form onSubmit={this.handleSubmit}>
             <input type="text" ref="tweetUrl" placeholder="Paste tweet url"/>
-            <button className="button">Add Tweet</button>
+            <Link to={`/tweet`}>
+              <button className="button">Add Tweet</button>
+            </Link>
             </form>
           </div>
         </div>

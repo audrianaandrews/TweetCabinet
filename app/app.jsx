@@ -1,12 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var {Provider} = require('react-redux');
+var {Route, Router, IndexRoute, browserHistory} = require('react-router');
 
 var TwitterAPI = require('TwitterAPI');
 var actions = require('actions');
 
 import TweetCabinetApp from 'TweetCabinetApp';
-
+import AddTweet from 'AddTweet';
 
 var store = require('configureStore').configure();
 
@@ -33,7 +34,10 @@ require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
   <Provider store={store}>
-  <TweetCabinetApp/>
+    <Router history={browserHistory}>
+         <Route path="/" component={TweetCabinetApp}></Route>
+          <Route path="/tweet" component={TweetCabinetApp}></Route>
+     </Router>
   </Provider>,
   document.getElementById('app')
 );
