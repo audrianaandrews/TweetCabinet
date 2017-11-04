@@ -103,8 +103,6 @@ module.exports = {
   filterTweets: function(tweets, filterText){
     var currentTweets = tweets;
 
-
-
     currentTweets.map((tweet) => {
       var newTags = [];
       tweet.tags.map((tag) => {

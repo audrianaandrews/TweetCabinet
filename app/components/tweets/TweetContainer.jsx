@@ -13,6 +13,9 @@ export var TweetContainer = React.createClass({
           groupDelete:this.props.groupDelete
       }
   },
+  componentDidMount: function() {
+    twttr.widgets.load()
+  },
   render: function () {
     var {content, tags, id, groupDelete, dispatch} = this.props;
     return (

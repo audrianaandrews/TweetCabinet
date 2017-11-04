@@ -19,16 +19,6 @@ const mapStateToProps = function (state) {
 }
 
 export var TweetCabinetApp = React.createClass({
-  componentWillReceiveProps(nextProps) {
-      /*var currentTweets = TwitterAPI.filterTweets(nextProps.tweets, nextProps.filterText);
-      var currentTags = TwitterAPI.sortTags(nextProps.tags);
-
-      this.setState({
-        tweets: currentTweets,
-        tags: currentTags,
-        filterText: nextProps.filterText
-      });*/
-  },
   render: function () {
     var {dispatch} = this.props;
     return (
