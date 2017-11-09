@@ -16,6 +16,7 @@ store.subscribe(() => {
   console.log('New state', state);
 });
 
+//Set initial states
 var initialTweets = TwitterAPI.getAllTweets();
 store.dispatch(actions.addTweets(initialTweets));
 
@@ -25,6 +26,9 @@ store.dispatch(actions.addTags(initialTags));
 
 var filterText = TwitterAPI.getTweetFilter("");
 store.dispatch(actions.filterTweets(filterText));
+
+var user = TwitterAPI.setUser(null);
+store.dispatch(actions.setUser(user));
 
 // Load foundation
 $(document).foundation();
@@ -36,7 +40,6 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
          <Route path="/" component={TweetCabinetApp}></Route>
-          <Route path="/tweet" component={TweetCabinetApp}></Route>
      </Router>
   </Provider>,
   document.getElementById('app')

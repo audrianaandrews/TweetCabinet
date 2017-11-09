@@ -98,3 +98,11 @@ export var filterTweets = (filterText) => {
     filterText
   };
 };
+
+/**User Reducer**/
+export var setUser = (id) => {
+  return {
+    type: 'SET_USER',
+    id
+  };
+};

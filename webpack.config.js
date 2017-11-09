@@ -29,6 +29,7 @@ module.exports ={
       './app/components/tags',
       './app/components/tweets',
       './app/components/users',
+      './app/components/firebase',
       './app/api',
       './app/components/modal'
     ],

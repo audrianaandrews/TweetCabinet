@@ -138,5 +138,8 @@ module.exports = {
     return axios.get(fullURL, configs).then((res) => {
       return res.data.html;
     });
+  },
+  setUser: function(userId){
+    return userId
   }
 };
