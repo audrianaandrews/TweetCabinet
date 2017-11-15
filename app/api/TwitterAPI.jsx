@@ -1,5 +1,7 @@
 var $ = require('jquery');
 var axios = require('axios');
+var firebaseApp = require('firebaseConfig');
+require('firebase/database');
 
 module.exports = {
   getAllTags: function(tweets){
@@ -140,6 +142,10 @@ module.exports = {
     });
   },
   setUser: function(userId){
-    return userId
+    firebaseApp.database().ref('users/').set({
+      userId
+    });
+
+    return userId;
   }
 };

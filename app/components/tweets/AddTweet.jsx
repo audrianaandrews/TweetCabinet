@@ -3,7 +3,8 @@ var React = require('react');
 var {connect} = require('react-redux');
 var actions = require('actions');
 var TwitterAPI = require('TwitterAPI');
-import { Link } from 'react-router';
+var firebaseApp = require('firebaseConfig');
+require('firebase/database');
 
 export var AddTweet = React.createClass({
   handleSubmit: function (e) {
@@ -20,6 +21,7 @@ export var AddTweet = React.createClass({
       tweetId = parseInt(tweetId);
       TwitterAPI.convertTweet(tweetUrl).then((content) =>{
           dispatch(actions.addTweet(content, tweetId));
+
           //this.refs.tweetUrl.value = '';
       });
     } else {
@@ -32,9 +34,7 @@ export var AddTweet = React.createClass({
     <div className="columns small-12">
       <form onSubmit={this.handleSubmit}>
             <input type="text" ref="tweetUrl" placeholder="Paste tweet url"/>
-            <Link to={`/tweet`}>
-              <button className="button">Add Tweet</button>
-            </Link>
+            <button className="button">Add Tweet</button>
             </form>
           </div>
         </div>

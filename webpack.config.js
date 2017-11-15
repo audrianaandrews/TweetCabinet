@@ -29,7 +29,7 @@ module.exports ={
       './app/components/tags',
       './app/components/tweets',
       './app/components/users',
-      './app/components/firebase',
+      './app/components/login',
       './app/api',
       './app/components/modal'
     ],
@@ -38,7 +38,8 @@ module.exports ={
       TwitterCredentials:'app/api/TwitterCredentials.js',
       actions: 'app/actions/actions.jsx',
       reducers: 'app/reducers/reducers.jsx',
-      configureStore: 'app/store/configureStore.jsx'
+      configureStore: 'app/store/configureStore.jsx',
+      firebaseConfig: 'app/firebaseConfig.js'
     },
     extensions: ['','.js', '.jsx', '.json']
   },
