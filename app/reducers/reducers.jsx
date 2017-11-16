@@ -164,6 +164,8 @@ export var userReducer = (state=null, action) => {
    switch(action.type){
       case 'SET_USER':
         return action.id
+      case 'SIGN_OUT_USER':
+        return null;
       default:
             return state;
         }

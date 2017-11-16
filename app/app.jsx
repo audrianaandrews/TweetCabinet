@@ -28,9 +28,6 @@ store.dispatch(actions.addTags(initialTags));
 var filterText = TwitterAPI.getTweetFilter("");
 store.dispatch(actions.filterTweets(filterText));
 
-var user = TwitterAPI.setUser(null);
-store.dispatch(actions.setUser(user));
-
 // Load foundation
 $(document).foundation();
 
@@ -41,7 +38,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-         <Route path="/login" exact component={Login}/>
+         <Route path="/" exact component={Login}/>
          <Route path="/cabinet" component={TweetCabinetApp}/>
         </div>
      </Router>

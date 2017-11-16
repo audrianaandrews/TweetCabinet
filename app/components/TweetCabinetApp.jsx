@@ -24,14 +24,13 @@ const mapStateToProps = function (state) {
 
 export var TweetCabinetApp = React.createClass({
   logout: function() {
-    // we will add the code for this in a moment, but need to add the method now or the bind will throw an error
+
   },
   render: function () {
     var {dispatch, user} = this.props;
-
-    if(user == null){
-      window.location.href="/login"
-    }
+    /*if(user == null){
+      window.location="/"
+    }*/
 
     return (
       <div className="row">
@@ -42,7 +41,11 @@ export var TweetCabinetApp = React.createClass({
             </div>
             <div className="columns medium-6">
               <TweetSearch />
-              <button onClick={this.logout}>Log Out</button>
+              <button onClick={
+                  () =>{
+                    dispatch(actions.signOutUser());
+                    window.location.href="/";
+                  }}>Log Out</button>
             </div>
           </div>
         </div>

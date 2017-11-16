@@ -2,6 +2,7 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 var {tweetsReducer, tagsReducer, filterTextReducer, userReducer} = require('reducers');
+var actions = require('actions');
 
 export var configure = () =>{
   var reducer = combineReducers({
@@ -15,5 +16,8 @@ export var configure = () =>{
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
+
+  store.dispatch(actions.verifyAuth());
+
   return store;
 };

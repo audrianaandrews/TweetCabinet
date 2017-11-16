@@ -140,12 +140,12 @@ module.exports = {
     return axios.get(fullURL, configs).then((res) => {
       return res.data.html;
     });
-  },
-  setUser: function(userId){
+  }
+  /*setUser: function(userId){
     firebaseApp.database().ref('users/').set({
       userId
     });
 
     return userId;
-  }
+  }*/
 };
