@@ -4,9 +4,9 @@ export var tweetsReducer = (state=[], action) => {
       return [
         ...state,
         {
-          id: action.tweetId,
-          content:action.content,
-          tags:"",
+          tweetId,
+          tags:[],
+          groupDelete:false
         }
       ];
       case 'ADD_TWEETS':
@@ -16,9 +16,9 @@ export var tweetsReducer = (state=[], action) => {
       case 'UPDATE_TWEET_TAGS':
         var tagToDelete = 0;
         state.map((tweet) => {
-          if(tweet.id === action.tweetId){
+          if(tweet.tweetId === action.tweetId){
             tweet.tags.map((tag, index) => {
-              if(tag.id === action.id){
+              if(tag.tagId === action.tagId){
                 tagToDelete = index;
               }
             });
@@ -31,7 +31,7 @@ export var tweetsReducer = (state=[], action) => {
       case 'DELETE_TWEET':
         var tweetToDelete = 0;
         state.map((tweet, index) => {
-          if(tweet.id === action.id){
+          if(tweet.tweetId === action.id){
             tweetToDelete = index;
           }
         });
@@ -42,12 +42,11 @@ export var tweetsReducer = (state=[], action) => {
         ];
       case 'TOGGLE_GROUP_DELETE':
         return state.map((tweet) => {
-          if(tweet.id === action.id){
+          if(tweet.tweetId === action.tweetId){
             var groupDelete = !tweet.groupDelete;
 
             return {
-              id: tweet.id,
-              content:tweet.content,
+              tweetId: tweet.tweetId,
               tags: tweet.tags,
               groupDelete: groupDelete
             };
@@ -60,7 +59,7 @@ export var tweetsReducer = (state=[], action) => {
           var tagToDelete = null;
 
           tweet.tags.map((tag, index) => {
-            if(tag.id === action.id){
+            if(tag.id === action.tagId){
               tagToDelete = index;
               console.log(tagToDelete);
             }
@@ -73,7 +72,7 @@ export var tweetsReducer = (state=[], action) => {
         return state;
       case 'ADD_TWEET_TAG':
         state.map((tweet) => {
-          if(tweet.id === action.tweetId){
+          if(tweet.tweetId === action.tweetId){
             tweet.tags.push({
                 id: action.tagId,
                 tagName: action.text
@@ -137,7 +136,7 @@ export var tagsReducer = (state=[], action) => {
       case 'DELETE_MAIN_TAG':
         var tagToDelete = 0;
         state.map((tag, index) => {
-          if(tag.id === action.id){
+          if(tag.id === action.tagId){
             tagToDelete = index;
           }
         });

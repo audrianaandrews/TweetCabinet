@@ -6,6 +6,7 @@ var TwitterAPI = require('TwitterAPI');
 var {connect} = require('react-redux');
 var actions = require('actions');
 var uuid = require('node-uuid');
+import { Tweet } from 'react-twitter-widgets';
 
 export var TweetContainer = React.createClass({
   getInitialState: function () {
@@ -14,10 +15,10 @@ export var TweetContainer = React.createClass({
       }
   },
   componentDidMount: function() {
-    twttr.widgets.load()
+    //twttr.widgets.load()
   },
   render: function () {
-    var {content, tags, id, groupDelete, dispatch} = this.props;
+    var {tags, tweetId, groupDelete, dispatch} = this.props;
     return (
       <div>
         <button className={this.state.groupDelete ? 'button' : 'button hollow'} onClick={
@@ -32,9 +33,9 @@ export var TweetContainer = React.createClass({
           dispatch(actions.deleteTweet(id));
           dispatch(actions.deleteTags(tags));
         }}>X</button>
-          <div dangerouslySetInnerHTML={{__html: content}}></div>
+      <Tweet tweetId={tweetId}/>
         <ul>
-          <TagList tags={tags} tweetId={id}/>
+          <TagList tags={tags} tweetId={+tweetId}/>
           <input type="text" placeholder="Add Tags" ref="newTag" onChange={
               () => {
                 var newTag = this.refs.newTag.value;
@@ -50,7 +51,7 @@ export var TweetContainer = React.createClass({
                   });
 
                   if(tagExists === false){
-                    dispatch(actions.addTweetTag(id, newTag, tagId));
+                    dispatch(actions.addTweetTag(tweetId, newTag, tagId));
                     dispatch(actions.addMainTag(tagId, newTag));
                   }
 

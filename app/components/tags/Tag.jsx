@@ -9,7 +9,7 @@ export var Tag = React.createClass({
     this.props.handleDeleteMainTag(this);
   },
   render: function () {
-    var {tagName, id, count} = this.props;
+    var {tagName, tagId, count} = this.props;
 
     return (
             <p>{tagName} <button onClick={() => {

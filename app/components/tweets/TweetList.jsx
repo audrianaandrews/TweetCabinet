@@ -11,7 +11,7 @@ export var TweetList = React.createClass({
     var renderTweets = () => {
       return TwitterAPI.filterTweets(tweets, filterText).map((tweet) => {
         return (
-          <TweetContainer key={tweet.id} {...tweet} />
+          <TweetContainer key={+tweet.tweetId} {...tweet} />
         );
       });
     };

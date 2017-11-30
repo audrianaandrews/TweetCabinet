@@ -19,11 +19,8 @@ export var AddTweet = React.createClass({
       var n = tweetId.lastIndexOf("/");
       var tweetId = tweetId.substr(n+1);
       tweetId = parseInt(tweetId);
-      TwitterAPI.convertTweet(tweetUrl).then((content) =>{
-          dispatch(actions.addTweet(content, tweetId));
-
-          //this.refs.tweetUrl.value = '';
-      });
+      dispatch(actions.addTweet(tweetId));
+      //this.refs.tweetUrl.value = '';
     } else {
       this.refs.tweetUrl.focus();
     }

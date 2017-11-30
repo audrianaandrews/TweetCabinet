@@ -5,25 +5,44 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const AUTH_USER = 'AUTH_USER';
 
 /***Tweet Actions***/
-export var addTweet = (content, id) => {
+export function addTweet(tweetId){
   return {
     type: 'ADD_TWEET',
-    content,
-    id
-  };
-};
+    tweetId
+  }
+  /*return function(dispatch) {
+    var user = firebase.auth().currentUser;
+    var newTweet = {
+      content: content,
+      tags: []
+    };
+    firebaseApp.database().ref('users/' + user.uid + "/tweets" + id).set({
+      newTweet
+    })
+        .then(() =>{
+            dispatch({
+              type: 'ADD_TWEET',
+              content,
+              id
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+  }*/
+}
 
-export var deleteTweet = (id) => {
+export var deleteTweet = (tweetId) => {
   return {
     type: 'DELETE_TWEET',
-    id
+    tweetId
   };
 };
 
-export var updateTweetTags = (id, tweetId) => {
+export var updateTweetTags = (tagId, tweetId) => {
   return {
     type: 'UPDATE_TWEET_TAGS',
-    id,
+    tagId,
     tweetId
   };
 };
@@ -68,10 +87,10 @@ export var deleteTweetTag = (tag, tags) =>{
   };
 };
 
-export var toggleGroupDelete = (id) => {
+export var toggleGroupDelete = (tweetId) => {
   return {
     type: 'TOGGLE_GROUP_DELETE',
-    id
+    tweetId
   };
 };
 
@@ -83,17 +102,17 @@ export var addMainTag = (tagId, text) => {
   };
 };
 
-export var deleteMainTag = (id) => {
+export var deleteMainTag = (tagId) => {
   return {
     type: 'DELETE_MAIN_TAG',
-    id
+    tagId
   };
 };
 
-export var deleteTagFromTweets = (id) => {
+export var deleteTagFromTweets = (tagId) => {
   return {
     type: 'DELETE_TAG_FROM_TWEETS',
-    id
+    tagId
   };
 };
 

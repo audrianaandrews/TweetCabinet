@@ -8,7 +8,7 @@ export var TagList = React.createClass({
   handleDeleteMainTag: function (tag) {
     var {dispatch, tags, tweetId} = this.props;
     dispatch(actions.deleteTags([tag.props]));
-    dispatch(actions.updateTweetTags(tag.props.id, tweetId));
+    dispatch(actions.updateTweetTags(tag.props.tagId, tweetId));
   },
   render: function () {
     var {tweets, tags, tweetId} = this.props;
@@ -17,7 +17,7 @@ export var TagList = React.createClass({
       return tags.map((tag) => {
         return (
           <li>
-            <Tag tagName={tag.tagName} key={tag.id} handleDeleteMainTag={this.handleDeleteMainTag} {...tag}/>
+            <Tag tagName={tag.tagName} key={+tag.tagId} handleDeleteMainTag={this.handleDeleteMainTag} {...tag}/>
           </li>
         );
       });
