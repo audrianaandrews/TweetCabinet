@@ -5,7 +5,7 @@ var {connect} = require('react-redux');
 
 export var MainTag = React.createClass({
   render: function () {
-    var {tag, id, count, dispatch} = this.props;
+    var {tag, tagId, count, dispatch} = this.props;
 
     return (
             <p><span onClick= {
@@ -16,8 +16,8 @@ export var MainTag = React.createClass({
                   if(count == 1){
                     dispatch(actions.filterTweets(""));
                   }
-                  dispatch(actions.deleteMainTag(id));
-                  dispatch(actions.deleteTagFromTweets(id));
+                  dispatch(actions.deleteMainTag(tagId));
+                  dispatch(actions.deleteTagFromTweets(tagId));
                 }}>X</button></p>
     )
   }

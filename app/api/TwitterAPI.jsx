@@ -21,7 +21,7 @@ module.exports = {
 
         if(tagExists == false){
           tags.push({
-            id: tag.tagId,
+            tagId: tag.tagId,
             tagName: tag.tagName.toLowerCase(),
             count: 1
           });
@@ -45,14 +45,17 @@ module.exports = {
         tags: [
           {
             tagId: 1,
-            tagName:"job"
+            tagName:"job",
+            count: 1
           }, {
             tagId: 2,
-            tagName:"interview"
+            tagName:"interview",
+            count: 1
           },
           {
             tagId: 7,
-            tagName:"funny"
+            tagName:"funny",
+            count: 2
           }],
         groupDelete: false
       },
@@ -61,19 +64,23 @@ module.exports = {
         tags: [
           {
             tagId: 3,
-            tagName:"rap"
+            tagName:"rap",
+            count: 1
           },
           {
             tagId: 4,
-            tagName:"awkward black girl"
+            tagName:"awkward black girl",
+            count: 1
           },
           {
             tagId: 5,
-            tagName:"issarae"
+            tagName:"issarae",
+            count: 1
           },
           {
             tagId: 7,
-            tagName:"funny"
+            tagName:"funny",
+            count: 2
           }],
         groupDelete: false
       },

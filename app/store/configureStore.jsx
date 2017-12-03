@@ -12,7 +12,7 @@ export var configure = () =>{
     user: userReducer
   });
 
-  var store = createStore(reducer, {user: null}, compose(
+  var store = createStore(reducer, {user: false}, compose(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));

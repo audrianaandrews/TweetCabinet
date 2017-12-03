@@ -26,17 +26,18 @@ export var TweetContainer = React.createClass({
               this.setState({
                 groupDelete: !this.state.groupDelete
               });
-              dispatch(actions.toggleGroupDelete(id));
+              dispatch(actions.toggleGroupDelete(tweetId));
             }}><i className="fa fa-check" aria-hidden="true"></i></button>
           <button className="button hollow" onClick={
         () =>{
-          dispatch(actions.deleteTweet(id));
+          console.log(tweetId);
+          dispatch(actions.deleteTweet(tweetId));
           dispatch(actions.deleteTags(tags));
         }}>X</button>
       <Tweet tweetId={tweetId}/>
         <ul>
-          <TagList tags={tags} tweetId={+tweetId}/>
-          <input type="text" placeholder="Add Tags" ref="newTag" onChange={
+          <TagList tags={tags} tweetId={tweetId}/>
+          <input type="text" placeholder="Add Tags separated by a comma" ref="newTag" onChange={
               () => {
                 var newTag = this.refs.newTag.value;
                 if(newTag.slice(-1) == ","){

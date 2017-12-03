@@ -12,7 +12,7 @@ export var MainTagList = React.createClass({
       return tags.map((tag) => {
         return (
           <li>
-            <MainTag tag={tag.tagName} key={tag.id} {...tag}/>
+            <MainTag tag={tag.tagName} key={tag.tagId} {...tag}/>
           </li>
         );
       });

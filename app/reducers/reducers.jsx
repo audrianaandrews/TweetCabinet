@@ -4,7 +4,7 @@ export var tweetsReducer = (state=[], action) => {
       return [
         ...state,
         {
-          tweetId,
+          tweetId:action.tweetId,
           tags:[],
           groupDelete:false
         }
@@ -31,7 +31,7 @@ export var tweetsReducer = (state=[], action) => {
       case 'DELETE_TWEET':
         var tweetToDelete = 0;
         state.map((tweet, index) => {
-          if(tweet.tweetId === action.id){
+          if(tweet.tweetId === action.tweetId){
             tweetToDelete = index;
           }
         });
@@ -59,7 +59,7 @@ export var tweetsReducer = (state=[], action) => {
           var tagToDelete = null;
 
           tweet.tags.map((tag, index) => {
-            if(tag.id === action.tagId){
+            if(tag.tagId === action.tagId){
               tagToDelete = index;
               console.log(tagToDelete);
             }
@@ -136,7 +136,7 @@ export var tagsReducer = (state=[], action) => {
       case 'DELETE_MAIN_TAG':
         var tagToDelete = 0;
         state.map((tag, index) => {
-          if(tag.id === action.tagId){
+          if(tag.tagId === action.tagId){
             tagToDelete = index;
           }
         });
@@ -159,12 +159,12 @@ export var filterTextReducer = (state="", action) => {
         }
 }
 
-export var userReducer = (state=null, action) => {
+export var userReducer = (state=false, action) => {
    switch(action.type){
       case 'SET_USER':
-        return action.id
+        return true
       case 'SIGN_OUT_USER':
-        return null;
+        return false;
       default:
             return state;
         }

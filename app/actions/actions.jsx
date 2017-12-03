@@ -125,10 +125,9 @@ export var filterTweets = (filterText) => {
 };
 
 /**User Reducer**/
-export function setUser(id) {
+export function setUser() {
   return {
-    type: 'SET_USER',
-    id
+    type: 'SET_USER'
   }
 }
 
@@ -138,7 +137,7 @@ export function signInUser() {
         firebaseApp.auth().signInWithPopup(provider)
         .then(function(result) {
             var user = result.user
-            dispatch(setUser(user.uid));
+            dispatch(setUser());
             window.location.href="/cabinet";
           })
             .catch(error => {
@@ -162,7 +161,7 @@ export function verifyAuth() {
     return function (dispatch) {
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
-                dispatch(setUser(user.uid));
+                dispatch(setUser());
             } else {
                 dispatch(signOutUser());
                 //window.location="/login"

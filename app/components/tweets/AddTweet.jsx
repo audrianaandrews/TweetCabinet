@@ -18,9 +18,8 @@ export var AddTweet = React.createClass({
       var tweetId = tweetUrl;
       var n = tweetId.lastIndexOf("/");
       var tweetId = tweetId.substr(n+1);
-      tweetId = parseInt(tweetId);
       dispatch(actions.addTweet(tweetId));
-      //this.refs.tweetUrl.value = '';
+      this.refs.tweetUrl.value = '';
     } else {
       this.refs.tweetUrl.focus();
     }
