@@ -3,40 +3,53 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const AUTH_USER = 'AUTH_USER';
+var TwitterAPI = require('TwitterAPI');
 
 /***Tweet Actions***/
 export function addTweet(tweetId){
-  return {
+  /*return {
     type: 'ADD_TWEET',
     tweetId
-  }
-  /*return function(dispatch) {
+  }*/
+  return function(dispatch) {
     var user = firebase.auth().currentUser;
     var newTweet = {
-      content: content,
-      tags: []
+      tags: [],
+      groupDelete: false
     };
-    firebaseApp.database().ref('users/' + user.uid + "/tweets" + id).set({
+    firebaseApp.database().ref('users/' + user.uid + "/tweets/" + tweetId).set(
       newTweet
-    })
+    )
         .then(() =>{
             dispatch({
               type: 'ADD_TWEET',
-              content,
-              id
+              tweetId
             });
         })
         .catch(error => {
             console.log(error);
         });
-  }*/
+  }
 }
 
 export var deleteTweet = (tweetId) => {
-  return {
+  /*return {
     type: 'DELETE_TWEET',
     tweetId
-  };
+  };*/
+  return function(dispatch) {
+  var user = firebase.auth().currentUser;
+  firebaseApp.database().ref('users/' + user.uid + "/tweets/").child(tweetId).remove()
+      .then(() =>{
+          dispatch({
+            type: 'DELETE_TWEET',
+            tweetId
+          });
+      })
+      .catch(error => {
+          console.log(error);
+      });
+    }
 };
 
 export var updateTweetTags = (tagId, tweetId) => {
@@ -55,12 +68,32 @@ export var addTweets = (tweets) =>{
 };
 
 export var addTweetTag = (tweetId, text, tagId) =>{
-  return {
+  /*return {
     type: 'ADD_TWEET_TAG',
     tweetId,
     text,
     tagId
-  };
+  };*/
+  return function(dispatch) {
+    var user = firebase.auth().currentUser;
+    var newTag = {
+        tagName: text
+    };
+    firebaseApp.database().ref('users/' + user.uid + "/tweets/" + tweetId+ "/tags/").child(tagId).set(
+      newTag
+    )
+        .then(() =>{
+            dispatch({
+              type: 'ADD_TWEET_TAG',
+              tweetId,
+              text,
+              tagId
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+  }
 };
 
 /***Tag Actions***/
@@ -138,7 +171,8 @@ export function signInUser() {
         .then(function(result) {
             var user = result.user
             dispatch(setUser());
-            window.location.href="/cabinet";
+
+            //window.href ="/cabinet";
           })
             .catch(error => {
                 console.log(error);
@@ -162,6 +196,21 @@ export function verifyAuth() {
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
                 dispatch(setUser());
+
+                var initialTweets = TwitterAPI.getAllTweets();
+
+                initialTweets.then(function(res){
+                console.log(res);
+                dispatch(addTweets(res));
+
+                var initialTags = TwitterAPI.getAllTags(res);
+                initialTags = TwitterAPI.sortTags(initialTags);
+                dispatch(addTags(initialTags));
+
+                var filterText = TwitterAPI.getTweetFilter("");
+                dispatch(filterTweets(filterText));
+
+              });
             } else {
                 dispatch(signOutUser());
                 //window.location="/login"

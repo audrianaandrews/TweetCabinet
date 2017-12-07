@@ -4,7 +4,7 @@
   "description": "Simple react app",
   "main": "index.js",
   "scripts": {
-    "test": "karma start",
+    "test": "jest",
     "start": "node server.js"
   },
   "author": "Audriana Andrews",
@@ -44,6 +44,7 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-sass": "^3.1.0",
     "gulp-webpack": "^1.5.0",
+    "jest": "^21.2.1",
     "jquery": "^2.2.1",
     "json-loader": "^0.5.7",
     "karma": "^0.13.22",

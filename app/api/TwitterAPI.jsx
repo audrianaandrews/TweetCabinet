@@ -1,7 +1,8 @@
 var $ = require('jquery');
 var axios = require('axios');
-var firebaseApp = require('firebaseConfig');
-require('firebase/database');
+var firebaseApp= require('firebaseConfig');
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 module.exports = {
   getAllTags: function(tweets){
@@ -39,62 +40,35 @@ module.exports = {
     return tags;
   },
   getAllTweets: function(){
-    var tweets = [
-      {
-        tweetId:"908511525417242624",
-        tags: [
-          {
-            tagId: 1,
-            tagName:"job",
-            count: 1
-          }, {
-            tagId: 2,
-            tagName:"interview",
-            count: 1
-          },
-          {
-            tagId: 7,
-            tagName:"funny",
-            count: 2
-          }],
-        groupDelete: false
-      },
-      {
-        tweetId:"912749648300986368",
-        tags: [
-          {
-            tagId: 3,
-            tagName:"rap",
-            count: 1
-          },
-          {
-            tagId: 4,
-            tagName:"awkward black girl",
-            count: 1
-          },
-          {
-            tagId: 5,
-            tagName:"issarae",
-            count: 1
-          },
-          {
-            tagId: 7,
-            tagName:"funny",
-            count: 2
-          }],
-        groupDelete: false
-      },
-      {
-        tweetId:"909765000184639489",
-        tags:[
-          {
-            tagId: 6,
-            tagName:"minions art"
-          }],
-        groupDelete: false
-      }
-    ];
-    return tweets;
+    var user = firebase.auth().currentUser;
+
+    return firebase.database().ref('users/' + user.uid + '/tweets').once('value').then(function(snapshot) {
+      var tweetData = snapshot.val();
+      var tweetKeys = Object.keys(snapshot.val());
+      var userTweets = [];
+      tweetKeys.map((tweetId) => {
+        var tags = []
+        var tagData = tweetData[tweetId].tags;
+        if (tagData){
+          var tagKeys = Object.keys(tagData);
+          tagKeys.map((tagId) => {
+            tags.push({
+              tagId,
+              tagName: tagData[tagId].tagName
+            });
+          });
+        }
+
+
+        userTweets.push({
+          tweetId,
+          tags,
+          groupDelete: false
+        })
+      });
+
+      return userTweets;
+    });
   },
   getTweetFilter: function(filterText){
     return filterText;

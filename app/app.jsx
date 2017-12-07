@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var {Provider} = require('react-redux');
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 var TwitterAPI = require('TwitterAPI');
 var actions = require('actions');
@@ -9,24 +9,26 @@ var actions = require('actions');
 import TweetCabinetApp from 'TweetCabinetApp';
 import AddTweet from 'AddTweet';
 import Login from 'Login';
+import Routes from 'Routes';
+
+var firebaseApp= require('firebaseConfig');
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 var store = require('configureStore').configure();
-
+var loggedIn = true;
 store.subscribe(() => {
   var state = store.getState();
+  updateRoutes(state);
   console.log('New state', state);
 });
 
-//Set initial states
-var initialTweets = TwitterAPI.getAllTweets();
-store.dispatch(actions.addTweets(initialTweets));
-
-var initialTags = TwitterAPI.getAllTags(initialTweets);
-initialTags = TwitterAPI.sortTags(initialTags);
-store.dispatch(actions.addTags(initialTags));
-
-var filterText = TwitterAPI.getTweetFilter("");
-store.dispatch(actions.filterTweets(filterText));
+const updateRoutes = function (state) {
+  console.log(loggedIn);
+  if(state.user){
+    loggedIn = true;
+  }
+}
 
 // Load foundation
 $(document).foundation();
@@ -34,14 +36,33 @@ $(document).foundation();
 // App css
 require('style!css!sass!applicationStyles')
 
+function PrivateRouteCabinet ({component: Component, authed}) {
+  return (
+    <Route
+      render={(props) => authed === true
+        ? <Component {...props} />
+      : <Redirect to={{pathname: '/login',
+        state: { from: props.location }}} />}
+    />
+  )
+}
+
+function PrivateRouteLogin ({component: Component, authed}) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authed === true
+        ? <Component {...props} />
+      : <Redirect to={{pathname: '/cabinet',
+        state: { from: props.location }}} />}
+    />
+  )
+}
+
 ReactDOM.render(
+
   <Provider store={store}>
-    <Router>
-      <div>
-         <Route path="/" exact component={Login}/>
-         <Route path="/cabinet" component={TweetCabinetApp}/>
-        </div>
-     </Router>
+    <Routes />
   </Provider>,
   document.getElementById('app')
 );

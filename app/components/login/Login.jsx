@@ -13,7 +13,7 @@ var {dispatch} = this.props;
             <button className="hollow button expanded" onClick={
                 () =>{
                   dispatch(actions.signInUser());
-                }}>Log In</button>
+                }}>Log In with Twitter</button>
         </div>
     )
   }

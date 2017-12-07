@@ -74,7 +74,7 @@ export var tweetsReducer = (state=[], action) => {
         state.map((tweet) => {
           if(tweet.tweetId === action.tweetId){
             tweet.tags.push({
-                id: action.tagId,
+                tagId: action.tagId,
                 tagName: action.text
             });
           }

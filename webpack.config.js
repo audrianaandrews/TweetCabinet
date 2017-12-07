@@ -31,7 +31,8 @@ module.exports ={
       './app/components/users',
       './app/components/login',
       './app/api',
-      './app/components/modal'
+      './app/components/modal',
+      './app/components/routes'
     ],
     alias:{
       applicationStyles: 'app/styles/app.scss',

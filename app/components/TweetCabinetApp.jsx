@@ -1,5 +1,4 @@
 var React = require('react');
-var TweetSearch = require('TweetSearch');
 var TwitterSignIn = require('TwitterSignIn');
 var firebaseApp, {provider, auth} = require('firebaseConfig');
 import * as firebase from 'firebase/app';
@@ -40,7 +39,6 @@ export var TweetCabinetApp = React.createClass({
               <h1>TweetCabinet</h1>
             </div>
             <div className="columns medium-6">
-              <TweetSearch />
               <button onClick={
                   () =>{
                     dispatch(actions.signOutUser());
