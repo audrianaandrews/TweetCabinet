@@ -7,13 +7,18 @@ var firebaseApp = require('firebaseConfig');
 require('firebase/database');
 
 export var AddTweet = React.createClass({
+  getInitialState: function () {
+      return {
+          noError:true
+      }
+  },
   handleSubmit: function (e) {
     e.preventDefault();
     var {dispatch} = this.props;
     var tweetUrl = this.refs.tweetUrl.value;
 
     //add check for url
-    if (tweetUrl.length > 0) {
+    if (tweetUrl.length > 0 && tweetUrl.indexOf("status") != -1) {
 
       var tweetId = tweetUrl;
       var n = tweetId.lastIndexOf("/");
@@ -22,6 +27,10 @@ export var AddTweet = React.createClass({
       this.refs.tweetUrl.value = '';
     } else {
       this.refs.tweetUrl.focus();
+      this.setState({
+        noError: !this.state.noError
+      });
+      this.refs.tweetUrl.value = '';
     }
   },
   render: function () {
@@ -29,9 +38,13 @@ export var AddTweet = React.createClass({
       <div className="row">
     <div className="columns small-12">
       <form onSubmit={this.handleSubmit}>
+        <div>
             <input type="text" ref="tweetUrl" placeholder="Paste tweet url"/>
+            <small className={this.state.noError ? 'noError' : ''}>Please enter a valid url</small>
+            </div>
             <button className="button">Add Tweet</button>
             </form>
+
           </div>
         </div>
     )

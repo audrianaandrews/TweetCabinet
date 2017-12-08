@@ -3,27 +3,29 @@ var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 var $ = require('jquery');
+import {shallow} from 'enzyme';
 
-import {TweetContainer} from 'TweetContainer';
+var {TweetCabinetApp} = require('TweetCabinetApp');
 
 describe('TweetContainer', () => {
   it('should exist', () => {
-    expect(TweetContainer).toExist();
+    const app  = shallow(<TweetCabinetApp/>);
+    expect(app.contains(<AddTweet />)).toBe(true);
+    //expect(TweetContainer).toExist();
   });
 
-  it('should call addTweetTag action on valid input', () => {
+  /*it('should call addTweetTag action on valid input', () => {
     var tagTest = 'funny';
-    var e = jQuery.Event("keypress");
-    e.keyCode = 188;
 
     var spy = expect.createSpy();
+    const app  = shallow(<App/>);
     var TweetContainer = TestUtils.renderIntoDocument(<TweetContainer addTweetTag={spy}/>);
     var $el = $(ReactDOM.findDOMNode(TweetContainer));
 
     TweetContainer.refs.newTag.value = newTag;
-    TestUtils.Simulate.submit($el.find('input'));
+    TestUtils.Simulate.change(TweetContainer.refs.newTag.value);
 
-    expect(spy).toHaveBeenCalledWith(newTag);
-  });
+    expect(spy).toHaveBeenCalledWith('funny');
+  });*/
 
 });

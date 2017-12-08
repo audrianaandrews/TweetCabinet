@@ -11,7 +11,8 @@ import { Tweet } from 'react-twitter-widgets';
 export var TweetContainer = React.createClass({
   getInitialState: function () {
       return {
-          groupDelete:this.props.groupDelete
+          groupDelete:this.props.groupDelete,
+          noError:true
       }
   },
   componentDidMount: function() {
@@ -36,10 +37,18 @@ export var TweetContainer = React.createClass({
       <Tweet tweetId={tweetId}/>
         <ul>
           <TagList tags={tags} tweetId={tweetId}/>
+          <div>
           <input type="text" placeholder="Add Tags separated by a comma" ref="newTag" onChange={
               () => {
                 var newTag = this.refs.newTag.value;
-                if(newTag.slice(-1) == ","){
+                if(newTag.length === 1){
+                  this.refs.newTag.value = "";
+                  tagExists = true;
+                  this.setState({
+                    noError: !this.state.noError
+                  });
+                }
+                else if(newTag.slice(-1) == ","){
                   newTag = newTag.slice(0, newTag.length-1).toLowerCase();
                   var tagId = uuid();
                   var tagExists = false;
@@ -47,6 +56,9 @@ export var TweetContainer = React.createClass({
 
                       if(tag.tagName == newTag){
                         tagExists = true;
+                        this.setState({
+                          noError: !this.state.noError
+                        });
                       }
                   });
 
@@ -59,6 +71,8 @@ export var TweetContainer = React.createClass({
                 }
               }
             }/>
+          <small className={this.state.noError ? 'noError' : ''}>Please enter a valid tag</small>
+            </div>
         </ul>
         <hr />
       </div>
