@@ -2,12 +2,13 @@ export var tweetsReducer = (state=[], action) => {
   switch(action.type){
     case 'ADD_TWEET':
       return [
-        ...state,
         {
           tweetId:action.tweetId,
           tags:[],
-          groupDelete:false
-        }
+          groupDelete:false,
+          createdAt: action.dateAdded
+        },
+        ...state
       ];
       case 'ADD_TWEETS':
         return [

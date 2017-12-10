@@ -10,7 +10,6 @@ var {NotFound} = require('NotFound');
 export var Routes = React.createClass({
   render: function () {
     var {dispatch, user} = this.props;
-    console.log(user);
     return (
       <Router>
           <Switch>
@@ -18,14 +17,14 @@ export var Routes = React.createClass({
           user ? ( <Route  component={TweetCabinetApp} />)
           : (<Route component={Login} />)
         )} />
-      <Route exact path="/404" component={NotFound}/>
+
       </Switch>
 
        </Router>
     )
   }
 });
-
+//<Route exact path="/404" component={NotFound}/>
 export default connect(
   (state) => {
     return {

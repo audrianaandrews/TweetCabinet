@@ -15,11 +15,8 @@ export var TweetContainer = React.createClass({
           noError:true
       }
   },
-  componentDidMount: function() {
-    //twttr.widgets.load()
-  },
   render: function () {
-    var {tags, tweetId, groupDelete, dispatch} = this.props;
+    var {tags, tweetId, groupDelete, dispatch, tweets} = this.props;
     return (
       <div>
         <button className={this.state.groupDelete ? 'button' : 'button hollow'} onClick={
@@ -31,8 +28,9 @@ export var TweetContainer = React.createClass({
             }}><i className="fa fa-check" aria-hidden="true"></i></button>
           <button className="button hollow" onClick={
         () =>{
-          dispatch(actions.deleteTweet(tweetId));
+
           dispatch(actions.deleteTags(tags));
+          dispatch(actions.deleteTweet(tweetId));
         }}>X</button>
       <Tweet tweetId={tweetId}/>
         <ul>
@@ -41,15 +39,8 @@ export var TweetContainer = React.createClass({
           <input type="text" placeholder="Add Tags separated by a comma" ref="newTag" onChange={
               () => {
                 var newTag = this.refs.newTag.value;
-                if(newTag.length === 1){
-                  this.refs.newTag.value = "";
-                  tagExists = true;
-                  this.setState({
-                    noError: !this.state.noError
-                  });
-                }
-                else if(newTag.slice(-1) == ","){
-                  newTag = newTag.slice(0, newTag.length-1).toLowerCase();
+                if(newTag.slice(-1) == "," && newTag.length > 1){
+                  newTag = newTag.replace(/,/g,"").toLowerCase();
                   var tagId = uuid();
                   var tagExists = false;
                   tags.map((tag) => {
@@ -63,8 +54,26 @@ export var TweetContainer = React.createClass({
                   });
 
                   if(tagExists === false){
-                    dispatch(actions.addTweetTag(tweetId, newTag, tagId));
+                    var isMainTag = false;
+
+                    for (var i = 0; i < tweets.length; i++) {
+                      var tweetTags = tweets[i].tags;
+                      for (var j = 0; j < tweetTags.length; j++) {
+                        if(tweetTags[j].tagName === newTag){
+                          dispatch(actions.addTweetTag(tweetId, newTag, tweetTags[j].tagId));
+                          isMainTag = true;
+                          break;
+                        }
+                      }
+                    }
+
+                    if(!isMainTag){
+                      console.log(tagId);
+                      dispatch(actions.addTweetTag(tweetId, newTag, tagId));
+                    }
+
                     dispatch(actions.addMainTag(tagId, newTag));
+
                   }
 
                   this.refs.newTag.value = "";
@@ -80,4 +89,8 @@ export var TweetContainer = React.createClass({
   }
 });
 
-export default connect()(TweetContainer);
+export default connect((state) => {
+  return {
+    tweets: state.tweets
+  }
+})(TweetContainer);

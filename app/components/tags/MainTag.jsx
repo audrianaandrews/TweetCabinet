@@ -5,7 +5,7 @@ var {connect} = require('react-redux');
 
 export var MainTag = React.createClass({
   render: function () {
-    var {tag, tagId, count, dispatch} = this.props;
+    var {tag, tagId, count, dispatch, tweets} = this.props;
 
     return (
             <p><span onClick= {
@@ -17,10 +17,21 @@ export var MainTag = React.createClass({
                     dispatch(actions.filterTweets(""));
                   }
                   dispatch(actions.deleteMainTag(tagId));
-                  dispatch(actions.deleteTagFromTweets(tagId));
+                  tweets.map((tweet) =>{
+                    tweet.tags.map((tag) => {
+                      if(tag.tagId === tagId){
+                        dispatch(actions.updateTweetTags(tag.tagId, tweet.tweetId));
+                      }
+                    });
+                  });
+
                 }}>X</button></p>
     )
   }
 });
 
-export default connect()(MainTag);
+export default connect((state) => {
+  return {
+    tweets: state.tweets
+  }
+})(MainTag);

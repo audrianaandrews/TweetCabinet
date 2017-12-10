@@ -49,6 +49,7 @@ module.exports = {
       tweetKeys.map((tweetId) => {
         var tags = []
         var tagData = tweetData[tweetId].tags;
+        var dateAdded = tweetData[tweetId].dateAdded;
         if (tagData){
           var tagKeys = Object.keys(tagData);
           tagKeys.map((tagId) => {
@@ -63,10 +64,11 @@ module.exports = {
         userTweets.push({
           tweetId,
           tags,
-          groupDelete: false
+          groupDelete: false,
+          dateAdded
         })
       });
-
+      userTweets.sort(function(a, b){return b.dateAdded-a.dateAdded});
       return userTweets;
     });
   },
@@ -76,7 +78,7 @@ module.exports = {
   groupDelete: function(tweets){
     var currentTweets = tweets;
     currentTweets = currentTweets.filter((tweet) => {
-      return !tweet.groupDelete;
+      return tweet.groupDelete;
     });
     return currentTweets;
   },

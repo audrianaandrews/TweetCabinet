@@ -14,16 +14,33 @@ export var AddTweet = React.createClass({
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    var {dispatch} = this.props;
+    var {dispatch, tweets} = this.props;
     var tweetUrl = this.refs.tweetUrl.value;
 
-    //add check for url
     if (tweetUrl.length > 0 && tweetUrl.indexOf("status") != -1) {
 
-      var tweetId = tweetUrl;
-      var n = tweetId.lastIndexOf("/");
-      var tweetId = tweetId.substr(n+1);
-      dispatch(actions.addTweet(tweetId));
+      var beg = tweetUrl.lastIndexOf("status/") + 7;
+      var statusStart = tweetUrl.substr(beg);
+      var end = statusStart.indexOf("/");
+
+      if(end != -1){
+        var tweetId = statusStart.substring(0,end);
+      }
+      else {
+        var tweetId = statusStart.substr(0);
+      }
+
+      var tweetExists = false;
+      tweets.map((tweet) => {
+        if(tweet.tweetId === tweetId){
+          tweetExists = true;
+        }
+      })
+
+      if(!tweetExists){
+        dispatch(actions.addTweet(tweetId));
+      }
+
       this.refs.tweetUrl.value = '';
     } else {
       this.refs.tweetUrl.focus();
@@ -51,4 +68,8 @@ export var AddTweet = React.createClass({
   }
 });
 
-export default connect()(AddTweet);
+export default connect((state) => {
+  return {
+    tweets: state.tweets
+  }
+})(AddTweet);

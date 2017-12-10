@@ -1,5 +1,4 @@
 var React = require('react');
-var TwitterSignIn = require('TwitterSignIn');
 var firebaseApp, {provider, auth} = require('firebaseConfig');
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -57,10 +56,11 @@ export var TweetCabinetApp = React.createClass({
         <div className="columns medium-12">
           <button className="hollow button expanded" onClick={
               () =>{
-                var currentTweets = TwitterAPI.groupDelete(this.props.tweets);
-                dispatch(actions.addTweets(currentTweets));
-                var currentTags = TwitterAPI.getAllTags(currentTweets);
-                dispatch(actions.addTags(currentTags));
+                var tweetsToDelete = TwitterAPI.groupDelete(this.props.tweets);
+                tweetsToDelete.map((tweet) => {
+                  dispatch(actions.deleteTags(tweet.tags));
+                  dispatch(actions.deleteTweet(tweet.tweetId));
+                });
               }}>Deleted Selected</button>
         </div>
       </div>
