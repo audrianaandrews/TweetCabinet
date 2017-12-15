@@ -16,8 +16,8 @@ export var TagList = React.createClass({
 
       return tags.map((tag) => {
         return (
-          <li>
-            <Tag tagName={tag.tagName} key={+tag.tagId} handleDeleteMainTag={this.handleDeleteMainTag} {...tag}/>
+          <li key={tag.tagId}>
+            <Tag tagName={tag.tagName} handleDeleteMainTag={this.handleDeleteMainTag} {...tag}/>
           </li>
         );
       });

@@ -8,7 +8,8 @@ import TweetContainer from "TweetContainer";
 export var TweetList = React.createClass({
   getInitialState: function(){
       return {
-          limit: 5
+          limit: 5,
+          noGroupDelete: true
       }
   },
   onLoadMore() {
@@ -21,17 +22,19 @@ export var TweetList = React.createClass({
     var renderTweets = () => {
       return TwitterAPI.filterTweets(tweets, filterText).slice(0,this.state.limit).map((tweet) => {
         return (
-          <TweetContainer key={+tweet.tweetId} {...tweet} />
+          <TweetContainer key={+tweet.tweetId} {...tweet} groupDeletePressed={this.onGroupDelete}/>
         );
       });
     };
     return (
-        <div>
-            <h2>Tweets:</h2>
+        <div className="tweetList">
+
             <ul>
               {renderTweets()}
             </ul>
-            <button onClick={this.onLoadMore}>Load</button>
+            <div className="center">
+            <button className="button" onClick={this.onLoadMore}>Load More</button>
+            </div>
         </div>
     )
   }

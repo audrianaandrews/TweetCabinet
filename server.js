@@ -13,12 +13,11 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // Set /public as our static content dir
 app.use("/", express.static(path.join(__dirname, 'public')));
+app.use("/404", express.static(path.join(__dirname, 'public')));
 
-
-app.get('*',
-    function(req, res) {
-      res.redirect('/404');
-    });
+app.use(function (req, res, next) {
+  res.redirect('/404');
+})
 
 app.listen(PORT, function () {
   console.log('Express server is up on port ' + PORT);

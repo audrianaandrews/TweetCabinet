@@ -11,31 +11,29 @@ import { Tweet } from 'react-twitter-widgets';
 export var TweetContainer = React.createClass({
   getInitialState: function () {
       return {
-          groupDelete:this.props.groupDelete,
           noError:true
       }
+  },
+  componentWillUpdate: function(nextProps) {
+    var {dispatch} = this.props;
+    var groupDeleteTweets = TwitterAPI.groupDelete(nextProps.tweets);
+    console.log(groupDeleteTweets);
+
+    if(groupDeleteTweets.length > 0){
+      dispatch(actions.allowGroupDelete(true));
+    } else{
+      dispatch(actions.allowGroupDelete(false));
+    }
   },
   render: function () {
     var {tags, tweetId, groupDelete, dispatch, tweets} = this.props;
     return (
-      <div>
-        <button className={this.state.groupDelete ? 'button' : 'button hollow'} onClick={
-            () =>{
-              this.setState({
-                groupDelete: !this.state.groupDelete
-              });
-              dispatch(actions.toggleGroupDelete(tweetId));
-            }}><i className="fa fa-check" aria-hidden="true"></i></button>
-          <button className="button hollow" onClick={
-        () =>{
+      <div className="tweetContainer">
 
-          dispatch(actions.deleteTags(tags));
-          dispatch(actions.deleteTweet(tweetId));
-        }}>X</button>
+    <div>
       <Tweet tweetId={tweetId}/>
-        <ul>
+      <hr />
           <TagList tags={tags} tweetId={tweetId}/>
-          <div>
           <input type="text" placeholder="Add Tags separated by a comma" ref="newTag" onChange={
               () => {
                 var newTag = this.refs.newTag.value;
@@ -80,10 +78,23 @@ export var TweetContainer = React.createClass({
                 }
               }
             }/>
-          <small className={this.state.noError ? 'noError' : ''}>Please enter a valid tag</small>
-            </div>
-        </ul>
-        <hr />
+</div>
+<div className="button-group">
+<button className={this.state.groupDelete ? 'button' : 'button hollow'} onClick={
+    () =>{
+      this.setState({
+        groupDelete: !this.state.groupDelete
+      });
+      dispatch(actions.toggleGroupDelete(tweetId));
+    }}><i className="fa fa-check" aria-hidden="true"></i></button>
+  <button className="button hollow" onClick={
+() =>{
+
+  dispatch(actions.deleteTags(tags));
+  dispatch(actions.deleteTweet(tweetId));
+}}><i className="fa fa-times" aria-hidden="true"></i></button>
+</div>
+
       </div>
     )
   }

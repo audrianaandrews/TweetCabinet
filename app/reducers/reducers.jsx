@@ -170,3 +170,12 @@ export var userReducer = (state=false, action) => {
             return state;
         }
 }
+
+export var allowGroupDeleteReducer = (state=false, action) => {
+   switch(action.type){
+      case 'ALLOW_GROUP_DELETE':
+        return action.allowGroupDelete
+      default:
+            return state;
+        }
+}

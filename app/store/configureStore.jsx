@@ -1,7 +1,7 @@
 //var  = require('redux');
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-var {tweetsReducer, tagsReducer, filterTextReducer, userReducer} = require('reducers');
+var {tweetsReducer, tagsReducer, filterTextReducer, userReducer, allowGroupDeleteReducer} = require('reducers');
 var actions = require('actions');
 
 export var configure = () =>{
@@ -9,10 +9,11 @@ export var configure = () =>{
     tweets: tweetsReducer,
     tags: tagsReducer,
     filterText: filterTextReducer,
-    user: userReducer
+    user: userReducer,
+    allowGroupDelete: allowGroupDeleteReducer
   });
 
-  var store = createStore(reducer, {user: false}, compose(
+  var store = createStore(reducer, {user: false, allowGroupDelete:false}, compose(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));

@@ -224,8 +224,14 @@ export function verifyAuth() {
                 });
             } else {
                 dispatch(signOutUser());
-                //window.location="/login"
             }
         });
     }
 }
+
+export var allowGroupDelete = (allowGroupDelete) => {
+  return {
+    type: 'ALLOW_GROUP_DELETE',
+    allowGroupDelete
+  }
+};

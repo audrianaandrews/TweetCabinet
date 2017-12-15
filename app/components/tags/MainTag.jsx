@@ -8,7 +8,7 @@ export var MainTag = React.createClass({
     var {tag, tagId, count, dispatch, tweets} = this.props;
 
     return (
-            <p><span onClick= {
+            <div><span onClick= {
               () => {
                 dispatch(actions.filterTweets(tag));
               }}>{tag} ({count}) </span> <button onClick={
@@ -25,7 +25,7 @@ export var MainTag = React.createClass({
                     });
                   });
 
-                }}>X</button></p>
+                }}>X</button></div>
     )
   }
 });

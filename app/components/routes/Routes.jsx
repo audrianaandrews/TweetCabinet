@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 
 import TweetCabinetApp from 'TweetCabinetApp';
 import Login from 'Login';
-var {NotFound} = require('NotFound');
+var NotFound = require('NotFound');
 
 export var Routes = React.createClass({
   render: function () {
@@ -13,18 +13,19 @@ export var Routes = React.createClass({
     return (
       <Router>
           <Switch>
+
           <Route exact path="/" render={() =>(
           user ? ( <Route  component={TweetCabinetApp} />)
           : (<Route component={Login} />)
         )} />
-
+      <Route path="/404" component={NotFound}/>
       </Switch>
 
        </Router>
     )
   }
 });
-//<Route exact path="/404" component={NotFound}/>
+//<
 export default connect(
   (state) => {
     return {

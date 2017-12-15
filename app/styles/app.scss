@@ -5,6 +5,109 @@
 @import "foundation";
 @include foundation-everything;
 
+body{
+  font-family: 'Open Sans', sans-serif;
+  font-weight:300;
+  position: relative;
+}
+
+button{
+  outline:none;
+}
+h1{
+  float: left;
+}
+h1, h2, h3, h4{
+  font-weight: 300;
+  font-family: 'Open Sans', sans-serif;
+}
+
+ul{
+  margin-left: 0;
+  list-style: none;
+}
+
+.header{
+  display: flex;
+    align-items: baseline;
+    padding:30px 0 10px;
+}
+
+.tagReset{
+  margin-bottom: 10px;
+}
+
+.button, .button:focus{
+  background-color:#7b7f85;
+  outline:none;
+}
+
+.button:hover{
+  background-color:#000;
+}
+
+.button.hollow, .button.hollow:hover, .button.hollow:focus {
+    border-color: #7b7f85;
+    color: #7b7f85;
+    outline:none;
+}
+
+.tagBackground{
+  margin-left: 20px;
+}
+
+.tweetContainer{
+  border: 1px solid #7b7f85;
+      padding: 0 10px 10px;
+      margin-bottom: 5px;
+      background-color:#fff;
+      display: block;
+    overflow: auto;
+}
+
+.tweetList{
+  margin-bottom: 41px;
+}
+
+.tweetContainer .tag{
+  float:left;
+  padding:0 5px;
+  color:#7b7f85;
+  border:1px solid #7b7f85;
+  margin-right: 5px;
+}
+
+.tweetContainer .tag:hover{
+  color:#000;
+  border:1px solid #000;
+}
+
+.tweetContainer > div{
+  float:left;
+}
+.tweetContainer .button-group {
+    float: right;
+        margin-top: 11px;
+}
+
+.logoutButton{
+  float:left;
+  margin-bottom: 0.5rem;
+  margin-left: 10px;
+}
+
+.gdButton{
+  display: none !important;
+  position:fixed;
+  bottom:0;
+  left:0;
+margin-bottom: 0;
+}
+
+.groupDelete.gdButton{
+  display: block !important;
+}
+
 // Components
 .editMode{
   display:none;
@@ -12,4 +115,22 @@
 
 .noError{
   display:none;
+}
+
+#upButton{
+  position:fixed;
+  bottom:50px;
+  right:10px;
+  font-size:40px;
+  color:#7b7f85;
+}
+
+@media only screen and (max-width: 40em) {
+.mainTag{
+  float:left;
+  width:33%;
+}
+h1{
+  padding-left:15px;
+}
 }

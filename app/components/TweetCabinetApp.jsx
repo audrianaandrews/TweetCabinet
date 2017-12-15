@@ -1,4 +1,5 @@
 var React = require('react');
+
 var firebaseApp, {provider, auth} = require('firebaseConfig');
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -16,53 +17,53 @@ const mapStateToProps = function (state) {
     tweets: state.tweets,
     tags: state.tags,
     filterText: state.filterText,
-    user:state.user
+    user:state.user,
+    allowGroupDelete:state.allowGroupDelete
   };
 }
 
 export var TweetCabinetApp = React.createClass({
-  logout: function() {
 
-  },
   render: function () {
-    var {dispatch, user} = this.props;
-    /*if(user == null){
-      window.location="/"
-    }*/
 
     return (
       <div className="row">
+        <div className="columns small-12 large-10 large-offset-1">
+      <div className="row">
         <div className="columns small-12">
           <div className="row">
-            <div className="columns medium-6">
+            <div className="columns medium-12 header">
               <h1>TweetCabinet</h1>
-            </div>
-            <div className="columns medium-6">
-              <button onClick={
-                  () =>{
-                    dispatch(actions.signOutUser());
-                    window.location.href="/";
-                  }}>Log Out</button>
+                <button className="logoutButton" onClick={
+                    () =>{
+                      dispatch(actions.signOutUser());
+                      window.location.href="/";
+                    }}>Log Out</button>
             </div>
           </div>
         </div>
+        <hr/>
         <div className="columns medium-4">
-          <AddTweet />
-          <MainTagList/>
+            <h3>Tags</h3>
+            <MainTagList/>
         </div>
         <div className="columns medium-8">
+          <h2>Tweets</h2>
+          <AddTweet />
+          <hr />
           <TweetList/>
+
         </div>
-        <div className="columns medium-12">
-          <button className="hollow button expanded" onClick={
-              () =>{
-                var tweetsToDelete = TwitterAPI.groupDelete(this.props.tweets);
-                tweetsToDelete.map((tweet) => {
-                  dispatch(actions.deleteTags(tweet.tags));
-                  dispatch(actions.deleteTweet(tweet.tweetId));
-                });
-              }}>Deleted Selected</button>
-        </div>
+      </div>
+      <button className={this.props.allowGroupDelete ? 'button expanded groupDelete gdButton' : 'button expanded gdButton'} onClick={
+          () =>{
+            var tweetsToDelete = TwitterAPI.groupDelete(this.props.tweets);
+            tweetsToDelete.map((tweet) => {
+              dispatch(actions.deleteTags(tweet.tags));
+              dispatch(actions.deleteTweet(tweet.tweetId));
+            });
+          }}>Delete Selected</button>
+      </div>
       </div>
     )
   }

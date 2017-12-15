@@ -11,20 +11,17 @@ export var MainTagList = React.createClass({
 
       return tags.map((tag) => {
         return (
-          <div>
 
-          <li>
-            <MainTag tag={tag.tagName} key={tag.tagId} {...tag}/>
+          <li key={"m" + tag.tagId} className="mainTag">
+            <MainTag tag={tag.tagName} {...tag}/>
           </li>
-        </div>
         );
       });
     };
 
     return (
-        <div>
-          <h3>Tags</h3>
-            <button onClick={() =>{
+        <div  className="tagBackground">
+            <button className="tagReset" onClick={() =>{
                 dispatch(actions.filterTweets(""));
               }}>Reset</button>
           <ul>

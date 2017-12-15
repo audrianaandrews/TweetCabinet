@@ -55,11 +55,16 @@ export var AddTweet = React.createClass({
       <div className="row">
     <div className="columns small-12">
       <form onSubmit={this.handleSubmit}>
-        <div>
-            <input type="text" ref="tweetUrl" placeholder="Paste tweet url"/>
-            <small className={this.state.noError ? 'noError' : ''}>Please enter a valid url</small>
+        <label>Paste tweet url to add a new tweet</label>
+        <div className="input-group">
+
+            <input type="text" className="input-group-field"  ref="tweetUrl" placeholder="e.g. https://twitter.com/Cherrell_Brown/status/940819680343875585"/>
+            <div className="input-group-button">
+            <button className="button"><i className="fa fa-plus" aria-hidden="true"></i></button>
             </div>
-            <button className="button">Add Tweet</button>
+            </div>
+            <small className={this.state.noError ? 'noError' : ''}>Please enter a valid url</small>
+
             </form>
 
           </div>

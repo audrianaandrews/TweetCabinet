@@ -12,7 +12,7 @@ export var Tag = React.createClass({
     var {tagName, tagId, count} = this.props;
 
     return (
-            <p>{tagName} <button onClick={() => {
+            <p className="tag">{tagName} <button onClick={() => {
                 this.deletePressed();
               }}>X</button></p>
     )
