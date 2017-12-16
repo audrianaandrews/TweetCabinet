@@ -25,23 +25,19 @@ const mapStateToProps = function (state) {
 export var TweetCabinetApp = React.createClass({
 
   render: function () {
-
+    var {dispatch} = this.props;
     return (
       <div className="row">
-        <div className="columns small-12 large-10 large-offset-1">
+        <div className="columns small-12 large-8 large-offset-2">
       <div className="row">
-        <div className="columns small-12">
-          <div className="row">
             <div className="columns medium-12 header">
-              <h1>TweetCabinet</h1>
+              <h1>Tweet Cabinet</h1>
                 <button className="logoutButton" onClick={
                     () =>{
                       dispatch(actions.signOutUser());
                       window.location.href="/";
                     }}>Log Out</button>
             </div>
-          </div>
-        </div>
         <hr/>
         <div className="columns medium-4">
             <h3>Tags</h3>

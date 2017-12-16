@@ -55,7 +55,7 @@ export var AddTweet = React.createClass({
       <div className="row">
     <div className="columns small-12">
       <form onSubmit={this.handleSubmit}>
-        <label>Paste tweet url to add a new tweet</label>
+        <label>Paste the url of a tweet to add it to the list. You may have to click on the tweet first to get to it's url.</label>
         <div className="input-group">
 
             <input type="text" className="input-group-field"  ref="tweetUrl" placeholder="e.g. https://twitter.com/Cherrell_Brown/status/940819680343875585"/>

@@ -11,30 +11,28 @@ body{
   position: relative;
 }
 
+/**Login Component**/
+.loginComponent{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginButton{
+  font-size:18px;
+}
+
+.loginButton.button.hollow:hover{
+  background-color: #000;
+  color:#fff;
+}
+
+/**Button Styles**/
 button{
   outline:none;
-}
-h1{
-  float: left;
-}
-h1, h2, h3, h4{
-  font-weight: 300;
-  font-family: 'Open Sans', sans-serif;
-}
-
-ul{
-  margin-left: 0;
-  list-style: none;
-}
-
-.header{
-  display: flex;
-    align-items: baseline;
-    padding:30px 0 10px;
-}
-
-.tagReset{
-  margin-bottom: 10px;
 }
 
 .button, .button:focus{
@@ -52,8 +50,45 @@ ul{
     outline:none;
 }
 
+/**Header Styles**/
+h1{
+  float: left;
+}
+h1, h2, h3, h4{
+  font-weight: 300;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/**Header Styles**/
+
+.header{
+  display: flex;
+    align-items: baseline;
+    padding:30px 15px 10px;
+}
+
+.logoutButton{
+  float:left;
+  margin-bottom: 0.5rem;
+  margin-left: 10px;
+}
+
+/**Tag Styles**/
+.mainTag:hover{
+  cursor:pointer;
+}
+
+.tagReset{
+  margin-bottom: 10px;
+}
+
 .tagBackground{
   margin-left: 20px;
+}
+
+/**Tweet Styles**/
+.tweetList{
+  margin-bottom: 41px;
 }
 
 .tweetContainer{
@@ -65,8 +100,14 @@ ul{
     overflow: auto;
 }
 
-.tweetList{
-  margin-bottom: 41px;
+.twitter-tweet.twitter-tweet-rendered{
+  width: 100% !important;
+}
+
+.tweetContainer .button-group {
+  float: right;
+        margin-top: 11px;
+        margin-bottom: 0;
 }
 
 .tweetContainer .tag{
@@ -82,39 +123,28 @@ ul{
   border:1px solid #000;
 }
 
-.tweetContainer > div{
-  float:left;
-}
-.tweetContainer .button-group {
-    float: right;
-        margin-top: 11px;
+.noError{
+  display:none;
 }
 
-.logoutButton{
-  float:left;
-  margin-bottom: 0.5rem;
-  margin-left: 10px;
-}
 
+/**Group Delete Styles**/
 .gdButton{
   display: none !important;
   position:fixed;
   bottom:0;
   left:0;
-margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .groupDelete.gdButton{
   display: block !important;
 }
 
-// Components
-.editMode{
-  display:none;
-}
-
-.noError{
-  display:none;
+/**Misc Styles**/
+ul{
+  margin-left: 0;
+  list-style: none;
 }
 
 #upButton{
@@ -131,6 +161,10 @@ margin-bottom: 0;
   width:33%;
 }
 h1{
-  padding-left:15px;
+  font-size:2rem;
+}
+h2{
+  margin-top:30px;
+  font-size:1.5rem;
 }
 }

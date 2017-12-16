@@ -62,7 +62,6 @@ export var tweetsReducer = (state=[], action) => {
           tweet.tags.map((tag, index) => {
             if(tag.tagId === action.tagId){
               tagToDelete = index;
-              console.log(tagToDelete);
             }
           });
 

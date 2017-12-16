@@ -16,19 +16,6 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 var store = require('configureStore').configure();
-var loggedIn = true;
-store.subscribe(() => {
-  var state = store.getState();
-  updateRoutes(state);
-  console.log('New state', state);
-});
-
-const updateRoutes = function (state) {
-  console.log(loggedIn);
-  if(state.user){
-    loggedIn = true;
-  }
-}
 
 // Load foundation
 $(document).foundation();

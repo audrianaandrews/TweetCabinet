@@ -17,7 +17,6 @@ export var TweetContainer = React.createClass({
   componentWillUpdate: function(nextProps) {
     var {dispatch} = this.props;
     var groupDeleteTweets = TwitterAPI.groupDelete(nextProps.tweets);
-    console.log(groupDeleteTweets);
 
     if(groupDeleteTweets.length > 0){
       dispatch(actions.allowGroupDelete(true));
@@ -29,7 +28,23 @@ export var TweetContainer = React.createClass({
     var {tags, tweetId, groupDelete, dispatch, tweets} = this.props;
     return (
       <div className="tweetContainer">
+        <div className="clearfix">
+        <div className="button-group">
+        <button className={this.state.groupDelete ? 'button' : 'button hollow'} onClick={
+            () =>{
+              this.setState({
+                groupDelete: !this.state.groupDelete
+              });
+              dispatch(actions.toggleGroupDelete(tweetId));
+            }}><i className="fa fa-check" aria-hidden="true"></i></button>
+          <button className="button hollow" onClick={
+        () =>{
 
+          dispatch(actions.deleteTags(tags));
+          dispatch(actions.deleteTweet(tweetId));
+        }}><i className="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+      </div>
     <div>
       <Tweet tweetId={tweetId}/>
       <hr />
@@ -79,21 +94,7 @@ export var TweetContainer = React.createClass({
               }
             }/>
 </div>
-<div className="button-group">
-<button className={this.state.groupDelete ? 'button' : 'button hollow'} onClick={
-    () =>{
-      this.setState({
-        groupDelete: !this.state.groupDelete
-      });
-      dispatch(actions.toggleGroupDelete(tweetId));
-    }}><i className="fa fa-check" aria-hidden="true"></i></button>
-  <button className="button hollow" onClick={
-() =>{
 
-  dispatch(actions.deleteTags(tags));
-  dispatch(actions.deleteTweet(tweetId));
-}}><i className="fa fa-times" aria-hidden="true"></i></button>
-</div>
 
       </div>
     )

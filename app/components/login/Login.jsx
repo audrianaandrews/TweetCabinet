@@ -9,8 +9,9 @@ export var Login = React.createClass({
   render: function () {
 var {dispatch} = this.props;
     return (
-        <div>
-            <button className="hollow button" onClick={
+        <div className="loginComponent ">
+            <h1>Tweet Cabinet</h1>
+            <button className="hollow button loginButton" onClick={
                 () =>{
                   dispatch(actions.signInUser());
                 }}>Log In with Twitter</button>
