@@ -1,12 +1,14 @@
 //add new tweet to folder, form, tweet id and tags to add
 var React = require('react');
+var createReactClass = require('create-react-class');
+
 var {connect} = require('react-redux');
 var actions = require('actions');
 var TwitterAPI = require('TwitterAPI');
 var firebaseApp = require('firebaseConfig');
 require('firebase/database');
 
-export var AddTweet = React.createClass({
+export var AddTweet = createReactClass({
   getInitialState: function () {
       return {
           noError:true

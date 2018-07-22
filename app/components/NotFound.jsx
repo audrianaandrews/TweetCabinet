@@ -1,7 +1,8 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 var {Link, IndexLink} = require('react-router-dom');
 
-var NotFound = React.createClass({
+export var NotFound = createReactClass({
   render:function(){
     return(
       <div>
@@ -12,4 +13,4 @@ var NotFound = React.createClass({
   }
 });
 
-module.exports = NotFound;
+export default NotFound;

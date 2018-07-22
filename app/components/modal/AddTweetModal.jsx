@@ -1,8 +1,9 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 var ReactDOM = require('react-dom');
 var ReactDOMServer = require('react-dom/server');
 
-var AddTweetModal = React.createClass({
+var AddTweetModal = createReactClass({
   getDefaultProps: function(){
     return{
       tweet: ''
@@ -36,4 +37,4 @@ var AddTweetModal = React.createClass({
   }
 });
 
-module.exports = AddTweetModal;
+export default AddTweetModal;

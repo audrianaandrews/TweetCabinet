@@ -1,4 +1,5 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 var {connect} = require('react-redux');
 var actions = require('actions');
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
@@ -7,7 +8,7 @@ import TweetCabinetApp from 'TweetCabinetApp';
 import Login from 'Login';
 var NotFound = require('NotFound');
 
-export var Routes = React.createClass({
+export var Routes = createReactClass({
   render: function () {
     var {dispatch, user} = this.props;
     return (

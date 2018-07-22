@@ -7,8 +7,9 @@ var {connect} = require('react-redux');
 var actions = require('actions');
 var uuid = require('node-uuid');
 import { Tweet } from 'react-twitter-widgets';
+var createReactClass = require('create-react-class');
 
-export var TweetContainer = React.createClass({
+export var TweetContainer = createReactClass({
   getInitialState: function () {
       return {
           noError:true

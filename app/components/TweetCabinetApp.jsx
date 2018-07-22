@@ -1,4 +1,5 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 
 var firebaseApp, {provider, auth} = require('firebaseConfig');
 import * as firebase from 'firebase/app';
@@ -22,9 +23,9 @@ const mapStateToProps = function (state) {
   };
 }
 
-export var TweetCabinetApp = React.createClass({
+export var TweetCabinetApp = createReactClass({
 
-  render: function () {
+  render: function() {
     var {dispatch} = this.props;
     return (
       <div className="row">

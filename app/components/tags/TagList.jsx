@@ -1,10 +1,11 @@
 //display the list of tags
 var React = require('react');
+var createReactClass = require('create-react-class');
 import Tag from "Tag";
 var actions = require('actions');
 var {connect} = require('react-redux');
 
-export var TagList = React.createClass({
+export var TagList = createReactClass({
   handleDeleteMainTag: function (tag) {
     var {dispatch, tags, tweetId} = this.props;
     dispatch(actions.deleteTags([tag.props]));

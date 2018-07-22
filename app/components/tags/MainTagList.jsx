@@ -1,5 +1,6 @@
 //display the list of tags
 var React = require('react');
+var createReactClass = require('create-react-class');
 import MainTag from "MainTag";
 var actions = require('actions');
 var {connect} = require('react-redux');

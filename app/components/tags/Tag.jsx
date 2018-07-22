@@ -1,10 +1,12 @@
 //display tag, can edit, delete, when tag deleted make tweets uncategorized if no tags left
 var React = require('react');
+var createReactClass = require('create-react-class');
+
 var actions = require('actions');
 var {connect} = require('react-redux');
 var TwitterAPI = require('TwitterAPI');
 
-export var Tag = React.createClass({
+export var Tag = createReactClass({
   deletePressed: function(e){
     this.props.handleDeleteMainTag(this);
   },
